@@ -32,9 +32,10 @@ const options = [
 
 interface MultipleSelectCheckmarksProps {
   name: string
+  label: string
 }
 
-const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name }) => {
+const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, label }) => {
   const [personName, setPersonName] = useState<string[]>([])
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -48,8 +49,8 @@ const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name }) =
   }
 
   return (
-    <FormControl sx={{ width: 300 }}>
-      <InputLabel id='demo-multiple-checkbox-label'>Tag</InputLabel>
+    <FormControl sx={{ width: 300, m: 1 }} size='small'>
+      <InputLabel id='demo-multiple-checkbox-label'>{label}</InputLabel>
       <Select
         labelId='demo-multiple-checkbox-label'
         id='demo-multiple-checkbox'
@@ -57,7 +58,7 @@ const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name }) =
         name={name}
         value={personName}
         onChange={handleChange}
-        input={<OutlinedInput label='Tag' />}
+        input={<OutlinedInput size='small' label='Tag' />}
         renderValue={selected => selected.join(', ')}
         MenuProps={MenuProps}
       >
