@@ -1,3 +1,4 @@
+export { MapFilter } from './MapFilter/MapFilter'
 export { Geolocation } from './Geolocation/Geolocation'
 export { SelectLayers } from './SelectLayer/SelectLayers'
 export { CustomMarker } from './CustomMarker/CustomMarker'

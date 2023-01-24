@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useState } from 'react'
 import { Box, Grid } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 
-import { Geolocation, SelectLayers, CustomMarker, Draw } from './parts'
+import { Geolocation, SelectLayers, CustomMarker, Draw, MapFilter } from './parts'
 import { NavButton } from '../../../ui'
 import { sx } from './style'
 import { controlPanelState, TControlPanel, ButtonActionNames } from './helper'
@@ -53,7 +53,9 @@ const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFea
           </NavButton>
         </Grid>
       </Box>
-
+      <Box sx={sx.filterContainer}>
+        <MapFilter />
+      </Box>
       <Grid>
         <Geolocation isActiveMode={getButtonStatus(ButtonActionNames.TRACK_LOCATION)} />
         <Draw
