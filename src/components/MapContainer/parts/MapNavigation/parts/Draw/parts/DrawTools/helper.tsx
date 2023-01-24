@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { RadioButtonUnchecked, HexagonRounded, FiberManualRecord, Timeline } from '@mui/icons-material'
 
-import { GeometryFigure } from '../../types/GeometryFigure'
+import { GeometryFigure } from '../../../../../../../../types/GeometryFigure'
 
 type DrawSourse = {
   name: string

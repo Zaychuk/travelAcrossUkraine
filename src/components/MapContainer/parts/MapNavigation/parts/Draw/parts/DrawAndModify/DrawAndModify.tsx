@@ -2,8 +2,8 @@ import { FC, useCallback } from 'react'
 import { platformModifierKeyOnly, doubleClick } from 'ol/events/condition'
 import { MapBrowserEvent, RInteraction, RLayerVector } from 'rlayers'
 
-import { GeometryFigure } from '../../types/GeometryFigure'
-import { StylesMapUtil } from '../../utils'
+import { GeometryFigure } from '../../../../../../../../types/GeometryFigure'
+import { StylesMapUtil } from '../../../../../../../../utils'
 
 interface DrawAndModifyProps {
   /**
@@ -40,4 +40,4 @@ const DrawAndModify: FC<DrawAndModifyProps> = ({ vectorRef, typeFigure, isModify
   )
 }
 DrawAndModify.displayName = 'DrawAndModify'
-export default DrawAndModify
+export { DrawAndModify }

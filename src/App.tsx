@@ -1,10 +1,8 @@
 import { CssBaseline } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import { MissingContent, MapContainer } from './components'
+import { MissingContent, MapContainer, SignIn, SignUp } from './components'
 import { Main } from './templates/Main'
-import { SignUp } from './components/SignUp'
-import { SignIn } from './components/SignIn'
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +29,7 @@ function App() {
   ])
 
   return (
+    // eslint-disable-next-line react/jsx-fragments
     <>
       <CssBaseline />
       <RouterProvider router={router} />

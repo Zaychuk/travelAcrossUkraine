@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import { Grid, useMediaQuery } from '@mui/material'
 import { Clear, Save } from '@mui/icons-material'
 
-import { NavButton } from '../ui'
-import { GeometryFigure } from '../../types/GeometryFigure'
+import { NavButton } from '../../../../../../../ui'
+import { GeometryFigure } from '../../../../../../../../types/GeometryFigure'
 import { drawTools } from './helper'
 import { sx } from './style'
 
@@ -49,4 +49,4 @@ const DrawTools: FC<SelectDrawToolProps> = props => {
 }
 
 DrawTools.displayName = 'DrawTools'
-export default DrawTools
+export { DrawTools }

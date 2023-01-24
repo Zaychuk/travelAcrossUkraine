@@ -4,13 +4,13 @@ import { RMap, ROSM as ROpenStreetMap, RLayerTile, RLayerVector, RFeature, RCont
 import { RView } from 'rlayers/RMap'
 import { Grid } from '@mui/material'
 
-import MapNavigation from '../MapNavigation'
+import { MapNavigation } from './parts'
 import { getAllFeatureFrom, sources as LayerSource, TSourse } from './helper'
 import { TFeature } from '../../types/GeometryFigure'
 import { styles } from './styles'
 import { StylesMapUtil } from './../../utils'
 
-const MapConrainer: FC = () => {
+const MapContainer: FC = () => {
   const initialMapOptions: RView = {
     center: fromLonLat([0, 0]),
     zoom: 5
@@ -85,5 +85,5 @@ const MapConrainer: FC = () => {
     </Grid>
   )
 }
-MapConrainer.displayName = 'MapConrainer'
-export default MapConrainer
+MapContainer.displayName = 'MapContainer'
+export { MapContainer }

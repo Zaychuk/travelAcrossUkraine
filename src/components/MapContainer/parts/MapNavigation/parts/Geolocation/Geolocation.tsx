@@ -10,7 +10,7 @@ import { RLayerVector, RFeature, RGeolocation, RStyle, RContextType, RContext } 
 
 import 'ol/ol.css'
 
-import defaultMarker from '../../assets/map/svg/location.svg'
+import defaultMarker from '../../../../../../assets/map/svg/location.svg'
 
 interface GeolocationProps {
   isActiveMode?: boolean | undefined
@@ -70,4 +70,4 @@ const Geolocation: FC<GeolocationProps> = ({ isActiveMode }) => {
   )
 }
 Geolocation.displayName = 'Geolocation'
-export default Geolocation
+export { Geolocation }

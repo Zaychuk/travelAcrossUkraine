@@ -1,8 +1,8 @@
 import { FC, MouseEvent } from 'react'
 import { Button, Grid, Typography } from '@mui/material'
 
-import { sources } from '../MapContainer/helper'
-import { MapModal } from '../ui'
+import { sources } from '../../../../../MapContainer/helper'
+import { MapModal } from '../../../../../ui'
 import { sx } from './style'
 interface SelectLayersProps {
   isOpen: boolean
@@ -38,4 +38,4 @@ const SelectLayers: FC<SelectLayersProps> = ({ isOpen, handleToggleLayers, selec
   )
 }
 SelectLayers.displayName = 'SelectLayers'
-export default SelectLayers
+export { SelectLayers }

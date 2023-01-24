@@ -17,9 +17,9 @@ import {
 
 import { styles } from './style'
 import { markerIconList } from './helper'
-import { useMap } from '../../hooks'
-import defaultMapMarker from '../../assets/map/svg/location.svg'
-import { OLOverlay } from '../ui'
+import { useMap } from '../../../../../../hooks'
+import defaultMapMarker from '../../../../../../assets/map/svg/location.svg'
+import { OLOverlay } from '../../../../../ui'
 
 type MarkerState = {
   iconTitle: string
@@ -144,4 +144,4 @@ const CustomMarker: FC = () => {
 //             </RFeature>
 //           ))} */}
 CustomMarker.displayName = 'CustomMarker'
-export default CustomMarker
+export { CustomMarker }

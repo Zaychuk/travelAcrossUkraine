@@ -4,4 +4,6 @@ export { default as EnvironmentPanel } from './core/EnvironmentPanel'
 export { default as MissingContent } from './core/MissingContent'
 // Additional Components
 
-export { default as MapContainer } from './MapContainer'
+export { MapContainer } from './MapContainer/MapContainer'
+export { SignUp } from './SignUp/SignUp'
+export { SignIn } from './SignIn/SignIn'

@@ -2,9 +2,8 @@ import React, { FC, RefObject, useCallback, useEffect, useRef, useState } from '
 import { RLayerVector } from 'rlayers'
 import { Circle, LineString, Point, Polygon } from 'ol/geom'
 
-import DrawAndModify from '../DrawAndModify'
-import DrawTools from '../DrawTools'
-import { GeometryFigure, TCircle, TFeature } from '../../types/GeometryFigure'
+import { DrawAndModify, DrawTools } from './parts'
+import { TCircle, GeometryFigure, TFeature } from '../../../../../../types/GeometryFigure'
 
 interface DrawProps {
   isOpenedDrawMenu: boolean
@@ -110,4 +109,4 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
   )
 }
 Draw.displayName = 'Draw'
-export default Draw
+export { Draw }

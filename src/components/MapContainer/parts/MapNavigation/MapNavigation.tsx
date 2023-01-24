@@ -2,11 +2,8 @@ import React, { FC, ReactNode, useState } from 'react'
 import { Box, Grid } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 
-import SelectLayers from '../SelectLayer'
-import Geolocation from '../Geolocation'
-import CustomMarker from '../CustomMarker'
-import Draw from '../Draw'
-import { NavButton } from '../ui'
+import { Geolocation, SelectLayers, CustomMarker, Draw } from './parts'
+import { NavButton } from '../../../ui'
 import { sx } from './style'
 import { controlPanelState, TControlPanel, ButtonActionNames } from './helper'
 
@@ -75,4 +72,4 @@ const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFea
   )
 }
 MapNavigation.displayName = 'MapNavigation'
-export default MapNavigation
+export { MapNavigation }
