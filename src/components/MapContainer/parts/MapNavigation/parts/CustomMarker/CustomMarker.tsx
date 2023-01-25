@@ -14,12 +14,12 @@ import {
   FormControlLabel,
   Tooltip
 } from '@mui/material'
+import { useMap } from 'hooks'
+import defaultMapMarker from 'assets/map/svg/location.svg'
+import { OLOverlay } from 'components/ui'
 
 import { styles } from './style'
 import { markerIconList } from './helper'
-import { useMap } from '../../../../../../hooks'
-import defaultMapMarker from '../../../../../../assets/map/svg/location.svg'
-import { OLOverlay } from '../../../../../ui'
 
 type MarkerState = {
   iconTitle: string

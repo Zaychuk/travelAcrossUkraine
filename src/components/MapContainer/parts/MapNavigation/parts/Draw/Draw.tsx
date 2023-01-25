@@ -1,9 +1,9 @@
 import React, { FC, RefObject, useCallback, useEffect, useRef, useState } from 'react'
 import { RLayerVector } from 'rlayers'
 import { Circle, LineString, Point, Polygon } from 'ol/geom'
+import { TCircle, GeometryFigure, TFeature } from 'types/GeometryFigure'
 
 import { DrawAndModify, DrawTools } from './parts'
-import { TCircle, GeometryFigure, TFeature } from '../../../../../../types/GeometryFigure'
 
 interface DrawProps {
   isOpenedDrawMenu: boolean

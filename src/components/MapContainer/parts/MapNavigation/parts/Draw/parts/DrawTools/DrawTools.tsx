@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { Grid, useMediaQuery } from '@mui/material'
 import { Clear, Save } from '@mui/icons-material'
+import { NavButton } from 'components/ui'
+import { GeometryFigure } from 'types/GeometryFigure'
 
-import { NavButton } from '../../../../../../../ui'
-import { GeometryFigure } from '../../../../../../../../types/GeometryFigure'
 import { drawTools } from './helper'
 import { sx } from './style'
 

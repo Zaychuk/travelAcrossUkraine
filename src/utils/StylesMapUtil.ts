@@ -9,8 +9,7 @@ import Feature from 'ol/Feature'
 import Style from 'ol/style/Style'
 import Geometry, { Type } from 'ol/geom/Geometry'
 import RenderFeature from 'ol/render/Feature'
-
-import { GeometryFigure } from '../types/GeometryFigure'
+import { GeometryFigure } from 'types/GeometryFigure'
 
 export class StylesMapUtil {
   static DEFAULT_DRAW_FILL_COLOR = 'rgba(0, 183, 43, 0.5)'

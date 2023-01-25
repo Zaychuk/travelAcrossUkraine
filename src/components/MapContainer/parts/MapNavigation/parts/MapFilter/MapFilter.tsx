@@ -3,8 +3,7 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-
-import { MultipleSelectCheckmarks } from '../../../../../ui'
+import { MultipleSelectCheckmarks } from 'components/ui'
 
 const MapFilter: FC = () => {
   const [open, setOpen] = useState(false)

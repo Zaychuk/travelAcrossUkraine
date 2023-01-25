@@ -1,9 +1,9 @@
 import React, { FC, ReactNode, useState } from 'react'
 import { Box, Grid } from '@mui/material'
 import { Delete } from '@mui/icons-material'
+import { NavButton } from 'components/ui'
 
 import { Geolocation, SelectLayers, CustomMarker, Draw, MapFilter } from './parts'
-import { NavButton } from '../../../ui'
 import { sx } from './style'
 import { controlPanelState, TControlPanel, ButtonActionNames } from './helper'
 
