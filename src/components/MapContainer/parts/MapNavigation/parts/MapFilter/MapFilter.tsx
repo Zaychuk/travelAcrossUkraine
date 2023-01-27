@@ -3,24 +3,11 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-import { MultipleSelectCheckmarks } from 'components/ui'
+import FilterAltIcon from '@mui/icons-material/FilterAlt'
+import { MultipleSelectCheckmarks, NavButton } from 'components/ui'
 
 const MapFilter: FC = () => {
   const [open, setOpen] = useState(false)
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('submit')
-
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      select: data.get('select')
-    })
-  }
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -30,6 +17,22 @@ const MapFilter: FC = () => {
     if (reason !== 'backdropClick') {
       setOpen(false)
     }
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log('submit')
+    event.preventDefault()
+
+    const data = new FormData(event.currentTarget)
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      select: data.get('select')
+    })
+
+    handleClose(event)
   }
 
   return (
@@ -44,9 +47,9 @@ const MapFilter: FC = () => {
       </Box>
 
       <Box display={{ xs: 'block', xl: 'none' }}>
-        <Button type='button' variant='contained' onClick={handleClickOpen}>
-          Open select dialog
-        </Button>
+        <NavButton tooltipTitle='Filter' tooltipPlacement='right-start' onClick={handleClickOpen}>
+          <FilterAltIcon />
+        </NavButton>
       </Box>
 
       <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>

@@ -1,7 +1,7 @@
 export const sx = {
   filterContainer: {
     position: 'absolute',
-    left: '25em',
+    left: '16em',
     top: '5em',
     display: 'flex',
     width: '500px',
