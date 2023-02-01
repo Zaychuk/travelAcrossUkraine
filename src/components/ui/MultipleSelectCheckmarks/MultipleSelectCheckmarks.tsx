@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 import Checkbox from '@mui/material/Checkbox'
 import { FC, useState } from 'react'
 import { Typography } from '@mui/material'
+import { Control, useController } from 'react-hook-form'
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -28,14 +29,18 @@ const options = [
 interface MultipleSelectCheckmarksProps {
   name: string
   label: string
+  control: Control
 }
 
-// interface IOption {
-//   label: string
-//   value: string
-// }
+const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, label, control }) => {
+  const {
+    field
+    // formState: { errors }
+  } = useController({
+    name,
+    control
+  })
 
-const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, label }) => {
   const [state, setState] = useState<string[]>([])
 
   const isAllSelected = options.length > 0 && state.length === options.length
@@ -48,20 +53,22 @@ const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, lab
 
     if (value[value.length - 1] === 'all') {
       setState(state.length === options.length ? [] : options.map(item => item.value))
+      field.onChange(state.length === options.length ? [] : options.map(item => item.value))
       return
     }
 
     setState(value as string[])
+    field.onChange(value)
   }
 
   return (
     <FormControl sx={{ width: 300, m: 1 }} size='small'>
       <InputLabel id='demo-multiple-checkbox-label'>{label}</InputLabel>
       <Select
-        labelId='demo-multiple-checkbox-label'
-        id='demo-multiple-checkbox'
+        labelId='multiple-checkbox-label'
+        id='multiple-checkbox'
         multiple
-        name={name}
+        name={field.name}
         value={state}
         onChange={handleChange}
         input={<OutlinedInput size='small' label='Tag' />}
