@@ -5,6 +5,7 @@ import { RView } from 'rlayers/RMap'
 import { Grid } from '@mui/material'
 import { StylesMapUtil } from 'utils'
 import { TFeature } from 'types/GeometryFigure'
+import { getAllLocations } from 'api/locationApi'
 
 import { MapNavigation } from './parts'
 import { getAllFeatureFrom, sources as LayerSource, TSourse } from './helper'
@@ -21,6 +22,7 @@ const MapContainer: FC = () => {
   const [isSavedFeature, setIsSavedFeature] = useState<boolean>(false)
 
   useEffect(() => {
+    console.log(getAllLocations())
     /* choosing the center of the map by location */
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
