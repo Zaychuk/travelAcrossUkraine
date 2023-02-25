@@ -1,9 +1,8 @@
 import { FC, useCallback } from 'react'
 import { platformModifierKeyOnly, doubleClick } from 'ol/events/condition'
 import { MapBrowserEvent, RInteraction, RLayerVector } from 'rlayers'
-
-import { GeometryFigure } from '../../../../../../../../types/GeometryFigure'
-import { StylesMapUtil } from '../../../../../../../../utils'
+import { StylesMapUtil } from 'utils'
+import { GeometryFigure } from 'types/GeometryFigure'
 
 interface DrawAndModifyProps {
   /**

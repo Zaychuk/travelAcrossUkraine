@@ -1,4 +1,4 @@
-import compassIcon from '../../assets/map/svg/compass.svg'
+import compassIcon from 'assets/map/svg/compass.svg'
 
 export const styles = {
   map: {

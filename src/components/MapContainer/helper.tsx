@@ -1,8 +1,7 @@
 import { Feature } from 'ol'
 import { Coordinate } from 'ol/coordinate'
 import { Circle, Polygon, Point, LineString, Geometry } from 'ol/geom'
-
-import { TCircle, TFeature } from '../../types/GeometryFigure'
+import { TCircle, TFeature } from 'types/GeometryFigure'
 
 export interface TSourse {
   name: string

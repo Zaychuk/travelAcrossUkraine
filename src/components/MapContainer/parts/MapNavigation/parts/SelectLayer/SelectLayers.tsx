@@ -1,8 +1,8 @@
 import { FC, MouseEvent } from 'react'
 import { Button, Grid, Typography } from '@mui/material'
+import { MapModal } from 'components/ui'
+import { sources } from 'components/MapContainer/helper'
 
-import { sources } from '../../../../../MapContainer/helper'
-import { MapModal } from '../../../../../ui'
 import { sx } from './style'
 interface SelectLayersProps {
   isOpen: boolean

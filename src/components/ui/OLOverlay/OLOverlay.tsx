@@ -1,8 +1,7 @@
 import { FC, ReactNode, useEffect, useRef } from 'react'
 import { Coordinate } from 'ol/coordinate'
 import { Overlay } from 'ol'
-
-import { useMap } from '../../../hooks'
+import { useMap } from 'hooks'
 
 interface OLOverlayProps {
   position: Coordinate

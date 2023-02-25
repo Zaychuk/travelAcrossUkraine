@@ -3,12 +3,12 @@ import { fromLonLat } from 'ol/proj'
 import { RMap, ROSM as ROpenStreetMap, RLayerTile, RLayerVector, RFeature, RControl } from 'rlayers'
 import { RView } from 'rlayers/RMap'
 import { Grid } from '@mui/material'
+import { StylesMapUtil } from 'utils'
+import { TFeature } from 'types/GeometryFigure'
 
 import { MapNavigation } from './parts'
 import { getAllFeatureFrom, sources as LayerSource, TSourse } from './helper'
-import { TFeature } from '../../types/GeometryFigure'
 import { styles } from './styles'
-import { StylesMapUtil } from './../../utils'
 
 const MapContainer: FC = () => {
   const initialMapOptions: RView = {

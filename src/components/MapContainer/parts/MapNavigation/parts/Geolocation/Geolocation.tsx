@@ -7,11 +7,9 @@ import { Coordinate } from 'ol/coordinate'
 import BaseEvent from 'ol/events/Event'
 import { linear } from 'ol/easing'
 import { RLayerVector, RFeature, RGeolocation, RStyle, RContextType, RContext } from 'rlayers'
+import defaultMarker from 'assets/map/svg/location.svg'
 
 import 'ol/ol.css'
-
-import defaultMarker from '../../../../../../assets/map/svg/location.svg'
-
 interface GeolocationProps {
   isActiveMode?: boolean | undefined
 }
