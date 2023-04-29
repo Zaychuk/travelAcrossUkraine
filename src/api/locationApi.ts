@@ -1,7 +1,9 @@
+import axios from 'axios'
 import { getBaseUrl } from 'utils/utility'
 
-export function getAllLocations(): Promise<Location[]> {
-    return fetch(`${getBaseUrl()}/api/Locations`, { method: 'GET' })
-    .then((data) => data.json())
-    .then((data) => data as Location[])
+import { Location } from '../types/Location'
+
+export async function getAllLocations(): Promise<Location[]> {
+    const data = await axios.get(`${getBaseUrl()}/api/Locations`)
+    return data.data as Location[]
 }
