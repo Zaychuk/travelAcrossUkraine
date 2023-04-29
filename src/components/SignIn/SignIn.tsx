@@ -9,30 +9,39 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
+import { login } from 'api/authApi'
 
 const theme = createTheme()
 
 export default function SignIn() {
   const navigate = useNavigate()
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  React.useEffect(() => {
+    localStorage.clear()
+  }, [])
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
+
+    const response = await login({
+      username: data.get('username') as string,
+      password: data.get('password') as string
     })
-    // TODO: request for user info
-    // const user = await ....
-    // if(!user){
-    // alert('error')
-    // }
-    navigate('/')
+
+    if (response === null) {
+      alert('Failed to login. Try again.')
+    } else {
+      alert('Successful login')
+      localStorage.setItem('token', response)
+      localStorage.setItem('isAuthenticated', 'true')
+      navigate('/')
+    }
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='xs'>
+      <Container component='main' maxWidth='sm'>
         <Box
           sx={{
             marginTop: 8,
@@ -53,10 +62,10 @@ export default function SignIn() {
                 <TextField
                   required
                   fullWidth
-                  id='email'
-                  label='Email Address'
-                  name='email'
-                  autoComplete='email'
+                  id='username'
+                  label='Користувацьке ім`я'
+                  name='username'
+                  autoComplete='username'
                   autoFocus
                 />
               </Grid>
@@ -65,7 +74,7 @@ export default function SignIn() {
                   required
                   fullWidth
                   name='password'
-                  label='Password'
+                  label='Пароль'
                   type='password'
                   id='password'
                   autoComplete='current-password'
@@ -73,14 +82,14 @@ export default function SignIn() {
               </Grid>
             </Grid>
             <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-              Sign In
+              Увійти
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to='/forgot-password'>Forgot password?</Link>
+                <Link to='/forgot-password'>Забуто пароль?</Link>
               </Grid>
               <Grid item>
-                <Link to='/sign-up'>Don't have an account? Sign Up</Link>
+                <Link to='/sign-up'>Немає облікового запису? Зареєстуватися</Link>
               </Grid>
             </Grid>
           </Box>

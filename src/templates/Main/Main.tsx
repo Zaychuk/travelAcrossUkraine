@@ -46,7 +46,7 @@ const Main: FC = () => {
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary='Home' />
+              <ListItemText primary='Головна' />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -54,7 +54,7 @@ const Main: FC = () => {
               <ListItemIcon>
                 <MapIcon />
               </ListItemIcon>
-              <ListItemText primary='Map' />
+              <ListItemText primary='Карта' />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -62,7 +62,7 @@ const Main: FC = () => {
               <ListItemIcon>
                 <InfoIcon />
               </ListItemIcon>
-              <ListItemText primary='About' />
+              <ListItemText primary='Про нас' />
             </ListItemButton>
           </ListItem>
         </List>
@@ -73,7 +73,7 @@ const Main: FC = () => {
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>
-              <ListItemText primary='Log out' />
+              <ListItemText primary='Вийти' />
             </ListItemButton>
           </ListItem>
         </List>

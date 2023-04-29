@@ -47,7 +47,7 @@ const MapFilter: FC = () => {
           <Grid container flexDirection='row' gap='10px'>
             <MultipleSelectCheckmarks control={methods.control} name='select' label='test' />
             <Button type='submit' variant='contained'>
-              Show
+              Застосувати
             </Button>
           </Grid>
         </Box>
