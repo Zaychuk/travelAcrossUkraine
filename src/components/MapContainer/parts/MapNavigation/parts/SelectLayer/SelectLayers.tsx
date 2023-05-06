@@ -19,7 +19,7 @@ const SelectLayers: FC<SelectLayersProps> = ({ isOpen, handleToggleLayers, selec
   return (
     <MapModal open={isOpen} onClose={handleToggleLayers}>
       <Grid container sx={sx.container}>
-        <Typography variant='h6'>Select map layer</Typography>
+        <Typography variant='h6'>Оберіть тип карти</Typography>
         {sources.map(({ name }) => (
           <Grid container item key={name} sx={sx.itemContainer}>
             <Button
