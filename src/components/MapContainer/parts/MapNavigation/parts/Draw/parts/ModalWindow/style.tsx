@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import styled from 'styled-components'
 
 export const ModalWrapper = styled.div`
@@ -13,12 +14,17 @@ export const ModalWrapper = styled.div`
 `
 export const Modal = styled.div`
   width: 400px;
-  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 15px;
   background-color: #ffffff;
   border-radius: 12px;
+`
+export const Title = styled(Typography)`
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
 `
 export const Close = styled.button`
   border-radius: 4px;
