@@ -2,8 +2,9 @@ import React, { FC, RefObject, useCallback, useEffect, useRef, useState } from '
 import { RLayerVector } from 'rlayers'
 import { Circle, LineString, Point, Polygon } from 'ol/geom'
 import { TCircle, GeometryFigure, TFeature } from 'types/GeometryFigure'
+import ReactPortal from 'components/core/ReactPortal/ReactPortal'
 
-import { DrawAndModify, DrawTools } from './parts'
+import { DrawAndModify, DrawTools, ModalWindow } from './parts'
 
 interface DrawProps {
   isOpenedDrawMenu: boolean
@@ -19,6 +20,7 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
   const [figureSource, setFigureSource] = useState<TFeature | null>(null)
   const [typeDrawing, setTypeDrawing] = useState<GeometryFigure | null>(null)
   const [isActiveModifyMode, setIsActiveModifyMode] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(false)
 
   const resetDrawing = () => {
     setFigureSource(null)
@@ -59,6 +61,14 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
     }
   }
 
+  const handleOpenModal = () => {
+    setShowModal(true)
+    handleSave()
+  }
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
+
   /* getting figure cordinates and type */
   const getFigureSource = useCallback((vector: RefObject<RLayerVector>) => {
     if (vector.current) {
@@ -87,11 +97,13 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
 
   return (
     <React.Fragment>
+      <ReactPortal wrapperId='modal-root'>{showModal && <ModalWindow onClose={handleCloseModal} />}</ReactPortal>
+
       {isOpenedDrawMenu && (
         <DrawTools
           isShowControl={!!figureSource}
           typeDraw={typeDrawing}
-          onSave={handleSave}
+          onSave={handleOpenModal}
           onDelete={handleRemoveFigure}
           onSelectDrawToolType={handleSelectDrawingToolType}
         />

@@ -14,7 +14,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
 import { signUp } from 'api/authApi'
 import { CreateUser } from 'types/CreateUser'
-// import { Input } from 'components/ui'
 
 const theme = createTheme()
 
@@ -83,12 +82,6 @@ function SignUp() {
                     label='Ім`я'
                     autoFocus
                   />
-                  {/* <Input
-                    label='First Name'
-                    autoFocus
-                    control={methods.control}
-                    name='givenName'
-                  /> */}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
