@@ -5,6 +5,7 @@ import { TCircle, GeometryFigure, TFeature } from 'types/GeometryFigure'
 import ReactPortal from 'components/core/ReactPortal/ReactPortal'
 
 import { DrawAndModify, DrawTools, ModalWindow } from './parts'
+import { LocationModalDataType } from './parts/ModalWindow/ModalWindow'
 
 interface DrawProps {
   isOpenedDrawMenu: boolean
@@ -47,26 +48,68 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
   }
 
   /* save figure to localStorage  */
-  const handleSave = () => {
+  const handleSave = (modalData: LocationModalDataType | null) => {
+    if (!modalData) return
+    console.log(modalData)
+    console.log(figureSource)
+    const renderFigureInfo = () => {
+      if (figureSource?.type === 'Point') {
+        const [corX, corY] = figureSource?.geometries as [number, number]
+        return {
+          geoPoint: {
+            coordinateX: corX,
+            coordinateY: corY
+          }
+        }
+      }
+      if (figureSource?.type === 'Circle') {
+        const { center, radius } = figureSource?.geometries as TCircle
+        return {
+          circle: {
+            centerGeoPoint: {
+              coordinateX: center[0],
+              coordinateY: center[1]
+            },
+            radius
+          }
+        }
+      }
+      if (figureSource?.type === 'Polygon') {
+        const geoPointsArr = figureSource?.geometries as [[number, number][]]
+
+        return {
+          geoPoints: geoPointsArr[0].map(arr => ({
+            coordinateX: arr[0],
+            coordinateY: arr[1]
+          }))
+        }
+      }
+    }
+    console.log('payload', {
+      ...modalData,
+      ...renderFigureInfo()
+    })
+
     setSavedFeature(true)
 
-    if (figureSource && Object.keys(figureSource).length !== 0) {
-      /* only for localstorage */
-      const featureCollectionFromlocalStorage = localStorage.getItem('FeatureCollection')
-      const newFeatureCollection: TFeature[] = featureCollectionFromlocalStorage
-        ? [...JSON.parse(featureCollectionFromlocalStorage), figureSource]
-        : [figureSource]
-      localStorage.setItem('FeatureCollection', JSON.stringify(newFeatureCollection))
-      resetDrawing()
-    }
+    // if (figureSource && Object.keys(figureSource).length !== 0) {
+    //   /* only for localstorage */
+    //   const featureCollectionFromlocalStorage = localStorage.getItem('FeatureCollection')
+    //   const newFeatureCollection: TFeature[] = featureCollectionFromlocalStorage
+    //     ? [...JSON.parse(featureCollectionFromlocalStorage), figureSource]
+    //     : [figureSource]
+    //   localStorage.setItem('FeatureCollection', JSON.stringify(newFeatureCollection))
+    //   resetDrawing()
+    // }
+    resetDrawing()
   }
 
   const handleOpenModal = () => {
     setShowModal(true)
-    handleSave()
   }
-  const handleCloseModal = () => {
+  const handleCloseModal = (modalData: LocationModalDataType | null) => {
     setShowModal(false)
+    handleSave(modalData)
   }
 
   /* getting figure cordinates and type */

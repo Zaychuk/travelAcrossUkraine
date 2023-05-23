@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import styled from 'styled-components'
 
 export const ModalWrapper = styled.div`
@@ -26,6 +26,46 @@ export const Title = styled(Typography)`
   font-weight: 600;
   margin-bottom: 20px;
 `
-export const Close = styled.button`
-  border-radius: 4px;
+export const ErrorMessage = styled(Typography)`
+  font-size: 12px;
+  /* width: 100%; */
+  /* margin-top: -20px; */
+  margin-left: 15px;
+  color: rgb(211, 47, 47);
+`
+export const ImagesContainer = styled(Grid)`
+  max-width: 386px;
+  overflow-y: auto;
+  padding-bottom: 5px;
+`
+export const Images = styled(Grid)`
+  gap: 10px;
+  align-items: center;
+  flex-wrap: nowrap;
+`
+export const ImgWrapper = styled.div`
+  width: 80px;
+  height: 80px;
+  border: 1px dashed grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+`
+export const Img = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+`
+export const Label = styled.label`
+  border: 1px dashed grey;
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  cursor: pointer;
 `
