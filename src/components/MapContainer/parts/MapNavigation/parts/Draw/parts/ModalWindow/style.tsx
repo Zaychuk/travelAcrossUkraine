@@ -53,6 +53,10 @@ export const ImgWrapper = styled.div`
   flex-shrink: 0;
   border-radius: 12px;
   overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    border-color: rgb(211, 47, 47);
+  }
 `
 export const Img = styled.img`
   max-width: 100%;

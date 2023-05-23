@@ -29,6 +29,8 @@
     "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "cloudinary": "^1.37.0",
+    "dotenv": "^16.0.3",
     "env-cmd": "^10.1.0",
     "ol": "^7.1.0",
     "preval.macro": "^5.0.0",

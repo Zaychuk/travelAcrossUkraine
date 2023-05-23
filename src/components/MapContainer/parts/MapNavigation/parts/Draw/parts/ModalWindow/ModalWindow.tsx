@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { FC, useEffect, useState } from 'react'
 import axios from 'axios'
 import { z } from 'zod'
@@ -40,7 +41,7 @@ export type LocationModalDataType = z.infer<typeof FormSchema>
 export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
   // const ref = useRef(null)
 
-  const [imgList, setImgList] = useState<string[]>([])
+  const [imgList, setImgList] = useState<{ url: string; id: string }[]>([])
 
   const [radioValue, setRadioValue] = useState('value1')
   const [options, setOptions] = useState<{ value: string; name: string }[] | []>([])
@@ -82,7 +83,21 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
     setSelectValue(event.target.value)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleImgDelete = (imgId: string) => {
+    const formData = new FormData()
+    formData.append('public_id', imgId)
+    axios
+      .post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/destroy`, formData)
+      .then(result => {
+        console.log(result)
+
+        return true
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   const handleImgChange = (e: any) => {
     const file = e.target.files[0]
     const formData = new FormData()
@@ -94,10 +109,11 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
     axios
       .post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/upload`, formData)
       .then(result => {
-        const imgUrl: string = result.data.secure_url
-        setImgList([...imgList, imgUrl])
+        const url: string = result.data.secure_url
+        const id: string = result.data.public_id
+        setImgList([...imgList, { url, id }])
 
-        methods.setValue('imageFiles', [...imgList, imgUrl])
+        methods.setValue('imageFiles', [...imgList.map(item => item.url), url])
         methods.setError('imageFiles', { message: undefined })
         return true
       })
@@ -164,8 +180,6 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
                   <Select
                     labelId='simple-select-label'
                     id='simple-select'
-                    // value={age}
-                    // {...methods.register('categoryId')}
                     value={selectValue}
                     label='Категорія'
                     onChange={handleSelectChange}
@@ -211,8 +225,13 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
               <S.ImagesContainer item xs={12}>
                 <S.Images item container>
                   {imgList.map((img, index) => (
-                    <S.ImgWrapper key={index}>
-                      <S.Img src={img} alt='Img' loading='lazy' />
+                    <S.ImgWrapper
+                      key={index}
+                      onClick={() => {
+                        handleImgDelete(img.id)
+                      }}
+                    >
+                      <S.Img src={img.url} alt='Img' loading='lazy' />
                     </S.ImgWrapper>
                   ))}
                   <Box>
