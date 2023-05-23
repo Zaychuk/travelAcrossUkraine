@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable max-lines-per-function */
 import { FC, useEffect, useState } from 'react'
 import axios from 'axios'
@@ -6,6 +7,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -19,7 +21,6 @@ import {
   TextField
 } from '@mui/material'
 import { zodResolver } from '@hookform/resolvers/zod'
-// import { useOnClickOutside } from 'hooks/useOnClickOutside'
 
 import * as S from './style'
 
@@ -39,11 +40,10 @@ interface ModalWindowProps {
 export type LocationModalDataType = z.infer<typeof FormSchema>
 
 export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
-  // const ref = useRef(null)
-
   const [imgList, setImgList] = useState<{ url: string; id: string }[]>([])
 
   const [radioValue, setRadioValue] = useState('value1')
+  const [isLoading, setIsLoading] = useState(false)
   const [options, setOptions] = useState<{ value: string; name: string }[] | []>([])
   const [selectValue, setSelectValue] = useState('')
 
@@ -57,14 +57,6 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
       petitionUrl: ''
     }
   })
-
-  // useOnClickOutside(ref, (isClickedoutside: boolean) => {
-  //   console.log(isClickedoutside)
-
-  //   if (isClickedoutside) {
-  //     onClose(null)
-  //   }
-  // })
 
   const onSubmit: SubmitHandler<LocationModalDataType> = data => {
     methods.reset()
@@ -84,21 +76,13 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
   }
 
   const handleImgDelete = (imgId: string) => {
-    const formData = new FormData()
-    formData.append('public_id', imgId)
-    axios
-      .post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/destroy`, formData)
-      .then(result => {
-        console.log(result)
+    setImgList([...imgList.filter(img => img.id !== imgId)])
 
-        return true
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    methods.setValue('imageFiles', [...imgList.filter(img => img.id !== imgId).map(item => item.url)])
   }
 
   const handleImgChange = (e: any) => {
+    setIsLoading(true)
     const file = e.target.files[0]
     const formData = new FormData()
 
@@ -115,9 +99,11 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
 
         methods.setValue('imageFiles', [...imgList.map(item => item.url), url])
         methods.setError('imageFiles', { message: undefined })
+        setIsLoading(false)
         return true
       })
       .catch(err => {
+        setIsLoading(false)
         console.log(err)
       })
   }
@@ -224,6 +210,11 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
               </Grid>
               <S.ImagesContainer item xs={12}>
                 <S.Images item container>
+                  {/* {isLoading ? (
+                    <S.ImgWrapper>
+                      <CircularProgress />
+                    </S.ImgWrapper>
+                  ) : null} */}
                   {imgList.map((img, index) => (
                     <S.ImgWrapper
                       key={index}
@@ -234,6 +225,11 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
                       <S.Img src={img.url} alt='Img' loading='lazy' />
                     </S.ImgWrapper>
                   ))}
+                  {isLoading ? (
+                    <S.LoadWrapper>
+                      <CircularProgress />
+                    </S.LoadWrapper>
+                  ) : null}
                   <Box>
                     <S.Label onChange={handleImgChange} htmlFor='image'>
                       <input type='file' name='image' id='image' hidden />+

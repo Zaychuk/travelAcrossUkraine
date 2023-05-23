@@ -1,13 +1,13 @@
 import { CssBaseline } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { MissingContent, MapContainer, SignIn, SignUp } from 'components'
+import { MissingContent, MapContainer, SignIn, SignUp, Collections } from 'components'
 import { Main } from 'templates/Main'
 import axios from 'axios'
 
 import { setupInterceptorsTo } from '../src/config/interceptors'
 
 function App() {
-setupInterceptorsTo(axios)
+  setupInterceptorsTo(axios)
   const router = createBrowserRouter([
     {
       path: '/',
@@ -18,6 +18,10 @@ setupInterceptorsTo(axios)
         {
           path: 'map',
           element: <MapContainer />
+        },
+        {
+          path: '/collections',
+          element: <Collections />
         }
       ]
     },

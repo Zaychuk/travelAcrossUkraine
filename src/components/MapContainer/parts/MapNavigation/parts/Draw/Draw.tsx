@@ -78,10 +78,12 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
         const geoPointsArr = figureSource?.geometries as [[number, number][]]
 
         return {
-          geoPoints: geoPointsArr[0].map(arr => ({
-            coordinateX: arr[0],
-            coordinateY: arr[1]
-          }))
+          polygon: {
+            geoPoints: geoPointsArr[0].map(arr => ({
+              coordinateX: arr[0],
+              coordinateY: arr[1]
+            }))
+          }
         }
       }
     }

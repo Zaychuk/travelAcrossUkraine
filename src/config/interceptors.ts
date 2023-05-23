@@ -2,7 +2,10 @@ import { AxiosError, AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } 
 
 const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
   const token = localStorage.getItem('token')
-  config.headers.Authorization = token ? `Bearer ${token}` : null
+  console.log(config.url)
+  if (!config.url?.includes('cloudinary')) {
+    config.headers.Authorization = token ? `Bearer ${token}` : null
+  }
 
   return config
 }

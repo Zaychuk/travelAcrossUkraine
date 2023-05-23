@@ -58,6 +58,17 @@ export const ImgWrapper = styled.div`
     border-color: rgb(211, 47, 47);
   }
 `
+export const LoadWrapper = styled.div`
+  width: 80px;
+  height: 80px;
+  border: 1px dashed grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+`
 export const Img = styled.img`
   max-width: 100%;
   max-height: 100%;
