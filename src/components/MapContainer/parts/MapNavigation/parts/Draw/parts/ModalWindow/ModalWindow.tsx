@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable dot-notation */
 /* eslint-disable max-lines-per-function */
 import { FC, useEffect, useState } from 'react'
@@ -120,6 +121,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
     setOptions(radioValue === 'value1' ? arr1 : arr2)
     setSelectValue(radioValue === 'value1' ? arr1[0].value : arr2[0].value)
     methods.setValue('categoryId', radioValue === 'value1' ? arr1[0].value : arr2[0].value)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [radioValue])
 
   return (
@@ -210,11 +212,6 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
               </Grid>
               <S.ImagesContainer item xs={12}>
                 <S.Images item container>
-                  {/* {isLoading ? (
-                    <S.ImgWrapper>
-                      <CircularProgress />
-                    </S.ImgWrapper>
-                  ) : null} */}
                   {imgList.map((img, index) => (
                     <S.ImgWrapper
                       key={index}
