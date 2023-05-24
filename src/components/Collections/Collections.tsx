@@ -4,6 +4,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, Box, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import Wiki from 'assets/svg/wikipedia-svgrepo-com.svg'
+import Petition from 'assets/svg/book-open-svgrepo-com.svg'
 
 import * as S from './style'
 
@@ -41,9 +43,7 @@ export default function Collections() {
             'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922353/samples/landscapes/beach-boat.jpg'
           ],
           description:
-            'Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.',
-          wikipediaUrl: 'https://en.wikipedia.org/wiki/Nature',
-          petitionUrl: 'https://petition.president.gov.ua/petition/185650'
+            'Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.'
         }
       ]
     },
@@ -60,7 +60,18 @@ export default function Collections() {
           ],
           description:
             'Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.',
-          wikipediaUrl: 'https://en.wikipedia.org/wiki/Nature',
+          wikipediaUrl: 'https://en.wikipedia.org/wiki/Nature'
+        },
+        {
+          name: 'Локація 10',
+          imageFiles: [
+            'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922368/cld-sample-2.jpg',
+            'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922353/samples/landscapes/beach-boat.jpg',
+            'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922368/cld-sample-2.jpg',
+            'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922353/samples/landscapes/beach-boat.jpg'
+          ],
+          description:
+            'Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.Phasellus et urna non diam aliquet efficitur ut tempor lacus. Nunc ut semper mi. Vivamus euismod imperdiet erat, eget vestibulum nunc sodales eu. Cras vel mattis orci. Morbi rhoncus pharetra odio nec rhoncus. Praesent venenatis, dolor ut lobortis ultricies, leo urna faucibus diam, non mollis neque urna quis quam. Donec efficitur sem nunc, quis pretium nibh elementum sit amet. Nullam orci libero, iaculis a arcu eget, aliquet fringilla velit. Fusce at augue id quam vehicula sagittis a eu neque. Nullam lacus justo, tristique vel aliquet vitae, pellentesque in eros. Vivamus in nibh sed odio accumsan convallis.',
           petitionUrl: 'https://petition.president.gov.ua/petition/185650'
         }
       ]
@@ -85,16 +96,31 @@ export default function Collections() {
             <AccordionDetails>
               {category.locations.map(location => (
                 <S.LocationContainer key={location.name}>
-                  <S.ImagesContainer>
-                    {location.imageFiles.map((img, index) => (
-                      <S.ImgContainer key={index}>
-                        <S.Img src={img} alt='Img' loading='lazy' />
-                      </S.ImgContainer>
-                    ))}
+                  <S.Wrapper>
                     <S.NameContainer>
                       <S.Name>{location.name}</S.Name>
+                      <Box display='flex' gap='5px' sx={{ marginRight: '30px', marginBottom: '7px' }}>
+                        {location.wikipediaUrl ? (
+                          <S.Link href={location.wikipediaUrl}>
+                            <S.Icon src={Wiki} alt='Wiki' />
+                          </S.Link>
+                        ) : null}
+                        {location.petitionUrl ? (
+                          <S.Link href={location.petitionUrl}>
+                            <S.Icon src={Petition} alt='Petition' />
+                          </S.Link>
+                        ) : null}
+                      </Box>
                     </S.NameContainer>
-                  </S.ImagesContainer>
+                    <S.ImagesContainer>
+                      {location.imageFiles.map((img, index) => (
+                        <S.ImgContainer key={index}>
+                          <S.Img src={img} alt='Img' loading='lazy' />
+                        </S.ImgContainer>
+                      ))}
+                    </S.ImagesContainer>
+                  </S.Wrapper>
+
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Typography fontSize={24} fontWeight={500}>
                       Опис

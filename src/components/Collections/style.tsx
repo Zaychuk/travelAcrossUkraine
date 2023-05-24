@@ -35,6 +35,7 @@ export const CategoryTitle = styled(Typography)`
   height: 29px;
 `
 export const LocationContainer = styled(Box)`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -46,14 +47,15 @@ export const LocationContainer = styled(Box)`
 `
 export const NameContainer = styled.div`
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.2s;
   position: absolute;
   display: flex;
   align-items: flex-end;
-  height: 100%;
+  height: 150px;
   width: 100%;
-  margin-top: auto;
   background: linear-gradient(0deg, rgba(31, 31, 31, 1) 0%, rgba(0, 0, 0, 0) 90%);
+  pointer-events: none;
+  z-index: 1;
 `
 export const Name = styled(Typography)`
   color: white;
@@ -63,6 +65,19 @@ export const Name = styled(Typography)`
   font-size: 28px;
   opacity: 0;
   transition: margin-bottom 0.4s 0.3s, opacity 0.2s 0.4s;
+`
+export const Link = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  pointer-events: all;
+  background-color: #ffffff;
+  border-radius: 4px;
+  opacity: 0;
+  margin-bottom: -30px !important;
+  transition: margin-bottom 0.4s 0.5s, opacity 0.25s 0.5s;
 `
 export const ImagesContainer = styled.div`
   display: flex;
@@ -78,6 +93,26 @@ export const ImagesContainer = styled.div`
       opacity: 1;
       margin-bottom: 10px !important;
     }
+    ${Link} {
+      opacity: 1;
+      margin-bottom: 0 !important;
+    }
+  }
+`
+export const Wrapper = styled.div`
+  position: relative;
+  &:hover {
+    ${NameContainer} {
+      opacity: 1;
+    }
+    ${Name} {
+      opacity: 1;
+      margin-bottom: 10px !important;
+    }
+    ${Link} {
+      opacity: 1;
+      margin-bottom: 0 !important;
+    }
   }
 `
 export const ImgContainer = styled.div`
@@ -89,4 +124,9 @@ export const ImgContainer = styled.div`
 export const Img = styled.img`
   max-width: 100%;
   max-height: 100%;
+`
+export const Icon = styled.img`
+  width: 15px;
+  height: 15px;
+  margin: 0 auto;
 `
