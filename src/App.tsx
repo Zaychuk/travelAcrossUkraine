@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { MissingContent, MapContainer, SignIn, SignUp, Collections } from 'components'
+import { MissingContent, MapContainer, SignIn, SignUp, Collections, Categories } from 'components'
 import { Main } from 'templates/Main'
 import axios from 'axios'
 
@@ -22,6 +22,10 @@ function App() {
         {
           path: '/collections',
           element: <Collections />
+        },
+        {
+          path: '/categories',
+          element: <Categories />
         }
       ]
     },

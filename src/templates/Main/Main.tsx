@@ -12,6 +12,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MapIcon from '@mui/icons-material/Map'
 import CollectionsIcon from '@mui/icons-material/Collections'
+import CategoryIcon from '@mui/icons-material/Category'
 import InfoIcon from '@mui/icons-material/Info'
 import HomeIcon from '@mui/icons-material/Home'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -64,6 +65,14 @@ const Main: FC = () => {
                 <CollectionsIcon />
               </ListItemIcon>
               <ListItemText primary='Колекції' />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to='/categories'>
+              <ListItemIcon>
+                <CategoryIcon />
+              </ListItemIcon>
+              <ListItemText primary='Категорії' />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>

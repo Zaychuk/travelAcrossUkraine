@@ -51,7 +51,7 @@ export default function Collections() {
       name: 'Категорія 2',
       locations: [
         {
-          name: 'Локація 10',
+          name: 'Локація 11',
           imageFiles: [
             'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922368/cld-sample-2.jpg',
             'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922353/samples/landscapes/beach-boat.jpg',
