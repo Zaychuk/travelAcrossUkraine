@@ -3,6 +3,7 @@ import { RLayerVector } from 'rlayers'
 import { Circle, LineString, Point, Polygon } from 'ol/geom'
 import { TCircle, GeometryFigure, TFeature } from 'types/GeometryFigure'
 import ReactPortal from 'components/core/ReactPortal/ReactPortal'
+import { createLocation } from 'api/locationApi'
 
 import { DrawAndModify, DrawTools, ModalWindow } from './parts'
 import { LocationModalDataType } from './parts/ModalWindow/ModalWindow'
@@ -48,7 +49,7 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
   }
 
   /* save figure to localStorage  */
-  const handleSave = (modalData: LocationModalDataType | null) => {
+  const handleSave = async (modalData: LocationModalDataType | null) => {
     if (!modalData) return
     console.log(modalData)
     console.log(figureSource)
@@ -103,6 +104,11 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature }) => {
     //   localStorage.setItem('FeatureCollection', JSON.stringify(newFeatureCollection))
     //   resetDrawing()
     // }
+
+    await createLocation({
+      ...modalData,
+      ...renderFigureInfo()
+    })
     resetDrawing()
   }
 

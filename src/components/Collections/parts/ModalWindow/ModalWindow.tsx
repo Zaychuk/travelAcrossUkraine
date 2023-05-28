@@ -14,24 +14,24 @@ const FormSchema = z.object({
 })
 
 interface ModalWindowProps {
-  editableCategory?: { id?: string; name?: string }
+  editableCollection?: { id?: string; name?: string }
   onClose: () => void
   onSubmit: (id?: string, name?: string) => void
 }
 
 export type LocationModalDataType = z.infer<typeof FormSchema>
 
-export const ModalWindow: FC<ModalWindowProps> = ({ onClose, editableCategory, onSubmit }) => {
+export const ModalWindow: FC<ModalWindowProps> = ({ onClose, editableCollection, onSubmit }) => {
   const methods = useForm<LocationModalDataType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: editableCategory?.name || ''
+      name: editableCollection?.name || ''
     }
   })
 
   const submit: SubmitHandler<LocationModalDataType> = data => {
     methods.reset()
-    onSubmit(editableCategory?.id, data.name)
+    onSubmit(editableCollection?.id, data.name)
     onClose()
   }
 

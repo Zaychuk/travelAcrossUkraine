@@ -24,10 +24,11 @@ export const Modal = styled.div`
 export const Title = styled(Typography)`
   font-size: 28px !important;
   font-weight: 600 !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 20px;
 `
-export const ErrorMessage = styled(Typography)`
-  font-size: 12px !important;
-  margin-left: 15px;
-  color: rgb(211, 47, 47);
+export const Description = styled(Typography)`
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  margin-bottom: 20px;
+  color: darkslategray;
 `

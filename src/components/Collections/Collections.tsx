@@ -1,27 +1,68 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MouseEvent } from 'react'
+import { Fragment, MouseEvent, useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { Accordion, AccordionDetails, Box, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, Box, Button, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Wiki from 'assets/svg/wikipedia-svgrepo-com.svg'
 import Petition from 'assets/svg/book-open-svgrepo-com.svg'
+import ReactPortal from 'components/core/ReactPortal/ReactPortal'
+import { ConfirmModal } from 'components/ui'
 
+import { ModalWindow } from './parts'
 import * as S from './style'
 
 export default function Collections() {
-  const handleEditCategory = (e: MouseEvent<HTMLButtonElement>) => {
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false)
+  const [editableCollection, setEditableCollection] = useState<{ id?: string; name?: string }>()
+
+  const handleOpenModal = (e: MouseEvent<HTMLButtonElement>, id?: string, name?: string) => {
     e.stopPropagation()
+    setShowModal(true)
+    if (id) {
+      setEditableCollection({ id, name })
+    }
   }
-  const handleDeleteCategory = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setEditableCollection({})
+  }
+  const handleCreate = (name: string) => {
+    console.log('create', name)
+  }
+  const handleEdit = (id: string, name: string) => {
+    console.log('edit', id, name)
+  }
+  const handleSubmit = (id?: string, name?: string) => {
+    if (id && name && name !== editableCollection?.name) {
+      handleEdit(id, name)
+    }
+    if (!id && name) {
+      handleCreate(name)
+    }
+  }
+
+  const handleOpenConfirmModal = (e: MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation()
+    setShowConfirmModal(true)
+    setEditableCollection({ id })
+  }
+  const handleCloseConfirmModal = () => {
+    setShowConfirmModal(false)
+    setEditableCollection({})
+  }
+  const handleDeleteCollection = () => {
+    console.log('delete', editableCollection?.id)
   }
 
   const arr = [
     {
+      id: '1',
       name: 'Категорія 1',
       locations: [
         {
+          id: '11',
           name: 'Локація 1',
           imageFiles: [
             'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922368/cld-sample-2.jpg',
@@ -35,6 +76,7 @@ export default function Collections() {
           petitionUrl: 'https://petition.president.gov.ua/petition/185650'
         },
         {
+          id: '12',
           name: 'Локація 2',
           imageFiles: [
             'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922368/cld-sample-2.jpg',
@@ -48,9 +90,11 @@ export default function Collections() {
       ]
     },
     {
+      id: '2',
       name: 'Категорія 2',
       locations: [
         {
+          id: '21',
           name: 'Локація 11',
           imageFiles: [
             'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922368/cld-sample-2.jpg',
@@ -63,6 +107,7 @@ export default function Collections() {
           wikipediaUrl: 'https://en.wikipedia.org/wiki/Nature'
         },
         {
+          id: '22',
           name: 'Локація 10',
           imageFiles: [
             'https://res.cloudinary.com/dw5vxfdjz/image/upload/v1667922368/cld-sample-2.jpg',
@@ -79,61 +124,96 @@ export default function Collections() {
   ]
 
   return (
-    <Box sx={{ padding: '20px' }}>
-      <S.Title>Колекції</S.Title>
+    <Fragment>
+      <ReactPortal wrapperId='modal-root'>
+        {showModal && (
+          <ModalWindow editableCollection={editableCollection} onClose={handleCloseModal} onSubmit={handleSubmit} />
+        )}
+      </ReactPortal>
+      <ReactPortal wrapperId='modal-root'>
+        {showConfirmModal && (
+          <ConfirmModal
+            title='Увага'
+            description='Дійсно хочете видалити категорію?'
+            onClose={handleCloseConfirmModal}
+            handleSubmit={handleDeleteCollection}
+          />
+        )}
+      </ReactPortal>
       <Box sx={{ padding: '20px' }}>
-        {arr.map(category => (
-          <Accordion key={category.name}>
-            <S.Summary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id='panel1a-header'>
-              <S.CategoryTitle>{category.name}</S.CategoryTitle>
-              <S.Btn onClick={handleEditCategory}>
-                <EditIcon sx={{ width: '16px', height: '16px', color: '#00AAFF' }} />
-              </S.Btn>
-              <S.Btn onClick={handleDeleteCategory}>
-                <DeleteIcon sx={{ width: '16px', height: '16px', color: 'rgb(211, 47, 47)' }} />
-              </S.Btn>
-            </S.Summary>
-            <AccordionDetails>
-              {category.locations.map(location => (
-                <S.LocationContainer key={location.name}>
-                  <S.Wrapper>
-                    <S.NameContainer>
-                      <S.Name>{location.name}</S.Name>
-                      <Box display='flex' gap='5px' sx={{ marginRight: '30px', marginBottom: '7px' }}>
-                        {location.wikipediaUrl ? (
-                          <S.Link href={location.wikipediaUrl}>
-                            <S.Icon src={Wiki} alt='Wiki' />
-                          </S.Link>
-                        ) : null}
-                        {location.petitionUrl ? (
-                          <S.Link href={location.petitionUrl}>
-                            <S.Icon src={Petition} alt='Petition' />
-                          </S.Link>
-                        ) : null}
-                      </Box>
-                    </S.NameContainer>
-                    <S.ImagesContainer>
-                      {location.imageFiles.map((img, index) => (
-                        <S.ImgContainer key={index}>
-                          <S.Img src={img} alt='Img' loading='lazy' />
-                        </S.ImgContainer>
-                      ))}
-                    </S.ImagesContainer>
-                  </S.Wrapper>
+        <Box display='flex' justifyContent='space-between' alignItems='center'>
+          <S.Title>Колекції</S.Title>
+          <Button
+            variant='contained'
+            onClick={e => {
+              handleOpenModal(e)
+            }}
+          >
+            Додати
+          </Button>
+        </Box>
+        <Box sx={{ padding: '20px' }}>
+          {arr.map(collection => (
+            <Accordion key={collection.id}>
+              <S.Summary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id='panel1a-header'>
+                <S.CategoryTitle>{collection.name}</S.CategoryTitle>
+                <S.Btn
+                  onClick={e => {
+                    handleOpenModal(e, collection.id, collection.name)
+                  }}
+                >
+                  <EditIcon sx={{ width: '16px', height: '16px', color: '#00AAFF' }} />
+                </S.Btn>
+                <S.Btn
+                  onClick={e => {
+                    handleOpenConfirmModal(e, collection.id)
+                  }}
+                >
+                  <DeleteIcon sx={{ width: '16px', height: '16px', color: 'rgb(211, 47, 47)' }} />
+                </S.Btn>
+              </S.Summary>
+              <AccordionDetails>
+                {collection.locations.map(location => (
+                  <S.LocationContainer key={location.id}>
+                    <S.Wrapper>
+                      <S.NameContainer>
+                        <S.Name>{location.name}</S.Name>
+                        <Box display='flex' gap='5px' sx={{ marginRight: '30px', marginBottom: '7px' }}>
+                          {location.wikipediaUrl ? (
+                            <S.Link href={location.wikipediaUrl}>
+                              <S.Icon src={Wiki} alt='Wiki' />
+                            </S.Link>
+                          ) : null}
+                          {location.petitionUrl ? (
+                            <S.Link href={location.petitionUrl}>
+                              <S.Icon src={Petition} alt='Petition' />
+                            </S.Link>
+                          ) : null}
+                        </Box>
+                      </S.NameContainer>
+                      <S.ImagesContainer>
+                        {location.imageFiles.map((img, index) => (
+                          <S.ImgContainer key={index}>
+                            <S.Img src={img} alt='Img' loading='lazy' />
+                          </S.ImgContainer>
+                        ))}
+                      </S.ImagesContainer>
+                    </S.Wrapper>
 
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Typography fontSize={24} fontWeight={500}>
-                      Опис
-                    </Typography>
-                    <Typography>{location.description}</Typography>
-                  </Box>
-                </S.LocationContainer>
-              ))}
-            </AccordionDetails>
-          </Accordion>
-        ))}
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                      <Typography fontSize={24} fontWeight={500}>
+                        Опис
+                      </Typography>
+                      <Typography>{location.description}</Typography>
+                    </Box>
+                  </S.LocationContainer>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </Fragment>
   )
 }
 

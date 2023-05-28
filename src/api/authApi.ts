@@ -3,7 +3,7 @@ import { LoginResponse, UserLogin } from 'types/UserLogin'
 import { CreateUser } from 'types/CreateUser'
 
 export async function login(param: UserLogin): Promise<LoginResponse | null> {
-  const data = await fetch(`${getBaseUrl()}/api/auth/login`, {
+  const data = await fetch(`${getBaseUrl()}/auth/login`, {
     method: 'POST',
     body: JSON.stringify(param),
     headers: {
@@ -21,7 +21,7 @@ export async function login(param: UserLogin): Promise<LoginResponse | null> {
 }
 
 export async function signUp(param: CreateUser): Promise<boolean> {
-  const data = await fetch(`${getBaseUrl()}/api/auth/signUp`, {
+  const data = await fetch(`${getBaseUrl()}/auth/signUp`, {
     method: 'POST',
     body: JSON.stringify(param),
     headers: {

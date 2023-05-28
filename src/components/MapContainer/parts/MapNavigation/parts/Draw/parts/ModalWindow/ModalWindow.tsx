@@ -22,13 +22,14 @@ import {
   TextField
 } from '@mui/material'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { getAllTypesWithCategories } from 'api/typesApi'
 
 import * as S from './style'
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: 'Поле обов`язкове' }),
   description: z.string().min(1, { message: 'Поле обов`язкове' }),
-  imageFiles: z.string().array().min(1, { message: 'Додайте картинки' }),
+  ImageUrls: z.string().array().min(1, { message: 'Додайте картинки' }),
   wikipediaUrl: z.string().url({ message: 'Некоректне посилання' }).optional().or(z.literal('')),
   petitionUrl: z.string().url({ message: 'Некоректне посилання' }).optional().or(z.literal('')),
   categoryId: z.any()
@@ -45,15 +46,19 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
 
   const [radioValue, setRadioValue] = useState('value1')
   const [isLoading, setIsLoading] = useState(false)
-  const [options, setOptions] = useState<{ value: string; name: string }[] | []>([])
-  const [selectValue, setSelectValue] = useState('')
+  const [categoryOptions, setCategoryOptions] = useState<{ id: string; name: string }[] | []>([])
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [placeOfInterestCategories, setPlaceOfInterestCategories] = useState<{ id: string; name: string }[] | []>([])
+  const [ecologicalProblemCategories, setEcologicalProblemCategories] = useState<{ id: string; name: string }[] | []>(
+    []
+  )
 
   const methods = useForm<LocationModalDataType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: '',
       description: '',
-      imageFiles: [],
+      ImageUrls: [],
       wikipediaUrl: '',
       petitionUrl: ''
     }
@@ -73,13 +78,13 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
     event.preventDefault()
     event.stopPropagation()
     methods.setValue('categoryId', event.target.value)
-    setSelectValue(event.target.value)
+    setSelectedCategory(event.target.value)
   }
 
   const handleImgDelete = (imgId: string) => {
     setImgList([...imgList.filter(img => img.id !== imgId)])
 
-    methods.setValue('imageFiles', [...imgList.filter(img => img.id !== imgId).map(item => item.url)])
+    methods.setValue('ImageUrls', [...imgList.filter(img => img.id !== imgId).map(item => item.url)])
   }
 
   const handleImgChange = (e: any) => {
@@ -98,8 +103,8 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
         const id: string = result.data.public_id
         setImgList([...imgList, { url, id }])
 
-        methods.setValue('imageFiles', [...imgList.map(item => item.url), url])
-        methods.setError('imageFiles', { message: undefined })
+        methods.setValue('ImageUrls', [...imgList.map(item => item.url), url])
+        methods.setError('ImageUrls', { message: undefined })
         setIsLoading(false)
         return true
       })
@@ -110,19 +115,27 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
   }
 
   useEffect(() => {
-    const arr1 = [
-      { value: '1', name: 'category1.1' },
-      { value: '2', name: 'category1.2' }
-    ]
-    const arr2 = [
-      { value: '3', name: 'category2.1' },
-      { value: '4', name: 'category2.2' }
-    ]
-    setOptions(radioValue === 'value1' ? arr1 : arr2)
-    setSelectValue(radioValue === 'value1' ? arr1[0].value : arr2[0].value)
-    methods.setValue('categoryId', radioValue === 'value1' ? arr1[0].value : arr2[0].value)
+    getAllTypesWithCategories()
+      .then(data => {
+        setPlaceOfInterestCategories(data[0].categories)
+        setEcologicalProblemCategories(data[1].categories)
+        return data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  useEffect(() => {
+    if (ecologicalProblemCategories.length > 0 && placeOfInterestCategories.length > 0) {
+      const arr1: { id: string; name: string }[] = placeOfInterestCategories
+      const arr2: { id: string; name: string }[] = ecologicalProblemCategories
+      setCategoryOptions(radioValue === 'value1' ? arr1 : arr2)
+      setSelectedCategory(radioValue === 'value1' ? arr1[0].id : arr2[0].id)
+      methods.setValue('categoryId', radioValue === 'value1' ? arr1[0].id : arr2[0].id)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [radioValue])
+  }, [ecologicalProblemCategories, placeOfInterestCategories, radioValue])
 
   return (
     <S.ModalWrapper
@@ -135,23 +148,23 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
           e.stopPropagation()
         }}
       >
-        <S.Title>Зберегти фігуру</S.Title>
+        <S.Title>Нова локація</S.Title>
         <FormProvider {...methods}>
           <Box component='form' onSubmit={methods.handleSubmit(onSubmit)}>
-            <Grid container sx={{ margin: '0', width: '370px', gap: '15px' }}>
+            <Grid container sx={{ margin: '0', width: '400px', gap: '15px' }}>
               <Grid item xs={12}>
                 <TextField
                   error={!!methods.formState.errors?.name?.message}
                   fullWidth
                   {...methods.register('name')}
                   id='name'
-                  label='Ім`я фігури'
+                  label='Назва локації'
                 />
                 <S.ErrorMessage>{methods.formState.errors?.name?.message || null}</S.ErrorMessage>
               </Grid>
               <Grid item xs={12}>
                 <FormControl>
-                  <FormLabel id='controlled-radio-buttons-group'>Два варіка</FormLabel>
+                  <FormLabel id='controlled-radio-buttons-group'>Тип локації</FormLabel>
                   <RadioGroup
                     row
                     aria-labelledby='controlled-radio-buttons-group'
@@ -159,8 +172,8 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
                     value={radioValue}
                     onChange={handleRadioChange}
                   >
-                    <FormControlLabel value='value1' control={<Radio />} label='Value1' />
-                    <FormControlLabel value='value2' control={<Radio />} label='Value2' />
+                    <FormControlLabel value='value1' control={<Radio />} label='Туристичне місце' />
+                    <FormControlLabel value='value2' control={<Radio />} label='Екологічна проблема' />
                   </RadioGroup>
                 </FormControl>
                 <FormControl fullWidth>
@@ -168,12 +181,12 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
                   <Select
                     labelId='simple-select-label'
                     id='simple-select'
-                    value={selectValue}
+                    value={selectedCategory}
                     label='Категорія'
                     onChange={handleSelectChange}
                   >
-                    {options.map((option, index) => (
-                      <MenuItem key={index} value={option.value}>
+                    {categoryOptions.map((option, index) => (
+                      <MenuItem key={index} value={option.id}>
                         {option.name}
                       </MenuItem>
                     ))}
@@ -233,7 +246,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose }) => {
                     </S.Label>
                   </Box>
                 </S.Images>
-                <S.ErrorMessage>{methods.formState.errors?.imageFiles?.message || null}</S.ErrorMessage>
+                <S.ErrorMessage>{methods.formState.errors?.ImageUrls?.message || null}</S.ErrorMessage>
               </S.ImagesContainer>
               <Grid item container xs={12} sx={{ justifyContent: 'space-between' }}>
                 <Button

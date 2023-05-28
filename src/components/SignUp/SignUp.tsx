@@ -67,7 +67,7 @@ function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign up
+            Реєстрація
           </Typography>
           <FormProvider {...methods}>
             <Box component='form' onSubmit={methods.handleSubmit(onSubmit)} sx={{ mt: 3 }}>
@@ -118,7 +118,7 @@ function SignUp() {
                     required
                     fullWidth
                     {...methods.register('password')}
-                    label='Password'
+                    label='Пароль'
                     type='password'
                     id='password'
                     autoComplete='new-password'

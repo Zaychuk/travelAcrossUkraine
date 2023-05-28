@@ -23,11 +23,11 @@ export const Container = styled.div`
   }
 `
 export const PartL = styled.div`
-  flex-grow: 1;
   padding-left: 15px;
+  width: 100%;
 `
 export const PartR = styled.div`
-  flex-grow: 1;
+  width: 100%;
   padding-right: 15px;
 `
 export const AddL = styled(Button)`

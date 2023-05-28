@@ -2,8 +2,8 @@ import { AccordionSummary, Box, Typography } from '@mui/material'
 import styled from 'styled-components'
 
 export const Title = styled(Typography)`
-  font-size: 42px;
-  font-weight: 600;
+  font-size: 22px !important;
+  font-weight: 600 !important;
 `
 export const Btn = styled.button`
   display: none;

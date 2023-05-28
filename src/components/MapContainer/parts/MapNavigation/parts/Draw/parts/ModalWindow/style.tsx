@@ -13,7 +13,7 @@ export const ModalWrapper = styled.div`
   z-index: 999;
 `
 export const Modal = styled.div`
-  width: 400px;
+  width: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
