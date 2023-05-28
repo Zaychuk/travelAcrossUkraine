@@ -2,6 +2,7 @@ import { RefObject, useEffect } from 'react'
 
 export function useOnClickOutside(ref: RefObject<HTMLElement>, handler: (isClickOut: boolean) => void) {
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const listener = (event: any) => {
       handler(!(ref.current && ref.current.contains(event.target)))
     }

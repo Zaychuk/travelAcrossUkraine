@@ -29,11 +29,14 @@ export default function SignIn() {
       password: data.get('password') as string
     })
 
+    console.log(response)
+
     if (response === null) {
       alert('Failed to login. Try again.')
     } else {
       alert('Successful login')
-      localStorage.setItem('token', response)
+      localStorage.setItem('token', response.token)
+      localStorage.setItem('role', response.role)
       localStorage.setItem('isAuthenticated', 'true')
       navigate('/')
     }
@@ -54,7 +57,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Sign in
+            Вхід
           </Typography>
           <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <Grid container spacing={2}>

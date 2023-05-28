@@ -19,20 +19,15 @@ const MenuProps = {
     }
   }
 }
-const options = [
-  { label: 'Oliver Hansen', value: 'OH' },
-  { label: 'Van Henry', value: 'VH' },
-  { label: 'April Tucker', value: 'AT' },
-  { label: 'Kelly Snyder', value: 'KS' }
-]
 
 interface MultipleSelectCheckmarksProps {
   name: string
   label: string
   control: Control
+  options: { id: string; value: string }[] | []
 }
 
-const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, label, control }) => {
+const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, label, control, options }) => {
   const {
     field
     // formState: { errors }
@@ -52,8 +47,8 @@ const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, lab
     console.log(value)
 
     if (value[value.length - 1] === 'all') {
-      setState(state.length === options.length ? [] : options.map(item => item.value))
-      field.onChange(state.length === options.length ? [] : options.map(item => item.value))
+      setState(state.length === options.length ? [] : options.map(item => item.id))
+      field.onChange(state.length === options.length ? [] : options.map(item => item.id))
       return
     }
 
@@ -62,7 +57,7 @@ const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, lab
   }
 
   return (
-    <FormControl sx={{ width: 300, m: 1 }} size='small'>
+    <FormControl size='medium'>
       <InputLabel id='demo-multiple-checkbox-label'>{label}</InputLabel>
       <Select
         labelId='multiple-checkbox-label'
@@ -71,12 +66,12 @@ const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, lab
         name={field.name}
         value={state}
         onChange={handleChange}
-        input={<OutlinedInput size='small' label='Tag' />}
+        input={<OutlinedInput size='medium' label='Категорії' />}
         renderValue={selected => {
           const labels: string[] = []
           selected.forEach(item => {
             // eslint-disable-next-line fp/no-mutating-methods
-            labels.push(options.find(option => option.value === item)?.label || '')
+            labels.push(options.find(option => option.id === item)?.value || '')
           })
           return labels.join(', ')
         }}
@@ -87,9 +82,9 @@ const MultipleSelectCheckmarks: FC<MultipleSelectCheckmarksProps> = ({ name, lab
           <ListItemText disableTypography primary={<Typography fontWeight='bold'>Select All</Typography>} />
         </MenuItem>
         {options.map((option, index) => (
-          <MenuItem key={index} value={option.value}>
-            <Checkbox checked={state.findIndex(item => item === option.value) > -1} />
-            <ListItemText primary={option.label} />
+          <MenuItem key={index} value={option.id}>
+            <Checkbox checked={state.findIndex(item => item === option.id) > -1} />
+            <ListItemText primary={option.value} />
           </MenuItem>
         ))}
       </Select>

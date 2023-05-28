@@ -8,6 +8,8 @@
     "yarn": ">= 1.22.4"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.10.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@hookform/error-message": "^2.0.1",
@@ -27,6 +29,8 @@
     "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "cloudinary": "^1.37.0",
+    "dotenv": "^16.0.3",
     "env-cmd": "^10.1.0",
     "ol": "^7.1.0",
     "preval.macro": "^5.0.0",
@@ -35,6 +39,7 @@
     "react-hook-form": "^7.43.0",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
+    "react-swipeable-views": "^0.14.0",
     "rlayers": "^1.4.5",
     "styled-components": "^5.3.6",
     "typescript": "^4.8.4",
@@ -93,6 +98,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
+    "@types/react-swipeable-views": "^0.13.1",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "commitizen": "^4.2.5",

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
@@ -11,14 +11,18 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MapIcon from '@mui/icons-material/Map'
+import CollectionsIcon from '@mui/icons-material/Collections'
+import CategoryIcon from '@mui/icons-material/Category'
 import InfoIcon from '@mui/icons-material/Info'
 import HomeIcon from '@mui/icons-material/Home'
+import GroupIcon from '@mui/icons-material/Group'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Link, Outlet } from 'react-router-dom'
 
 const drawerWidth = 200
 
 const Main: FC = () => {
+  const userRole = localStorage.getItem('role')
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position='fixed' sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>
@@ -58,7 +62,35 @@ const Main: FC = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to='/about'>
+            <ListItemButton component={Link} to='/collections'>
+              <ListItemIcon>
+                <CollectionsIcon />
+              </ListItemIcon>
+              <ListItemText primary='Колекції' />
+            </ListItemButton>
+          </ListItem>
+          {userRole === 'Admin' && (
+            <React.Fragment>
+              <ListItem disablePadding>
+                <ListItemButton component={Link} to='/categories'>
+                  <ListItemIcon>
+                    <CategoryIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Категорії' />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton component={Link} to='/users'>
+                  <ListItemIcon>
+                    <GroupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Користувачі' />
+                </ListItemButton>
+              </ListItem>
+            </React.Fragment>
+          )}
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to='/about' sx={{}}>
               <ListItemIcon>
                 <InfoIcon />
               </ListItemIcon>

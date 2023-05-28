@@ -5,7 +5,7 @@ import { RView } from 'rlayers/RMap'
 import { Grid } from '@mui/material'
 import { StylesMapUtil } from 'utils'
 import { TFeature } from 'types/GeometryFigure'
-import { getAllLocations } from 'api/locationApi'
+// import { getAllLocations } from 'api/locationApi'
 
 import { MapNavigation } from './parts'
 import { getAllFeatureFrom, sources as LayerSource, TSourse } from './helper'
@@ -13,28 +13,28 @@ import { styles } from './styles'
 
 const MapContainer: FC = () => {
   const initialMapOptions: RView = {
-    center: fromLonLat([0, 0]),
-    zoom: 5
+    center: fromLonLat([33, 49]),
+    zoom: 6.2
   }
   const [view, setView] = useState<RView>(initialMapOptions)
   const [sources, setSources] = useState<TSourse[]>(LayerSource)
   const [features, setFeatures] = useState<TFeature[] | null>(null)
   const [isSavedFeature, setIsSavedFeature] = useState<boolean>(false)
 
-  useEffect(() => {
-    console.log(getAllLocations())
-    /* choosing the center of the map by location */
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const newView = {
-          center: fromLonLat([position.coords.longitude, position.coords.latitude])
-          // zoom: 9
-        }
-        setView({ ...view, ...newView })
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // useEffect(() => {
+  //   console.log(getAllLocations())
+  //   /* choosing the center of the map by location */
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition(position => {
+  //       const newView = {
+  //         center: fromLonLat([position.coords.longitude, position.coords.latitude]),
+  //         zoom: 9
+  //       }
+  //       setView({ ...view, ...newView })
+  //     })
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   useEffect(() => {
     const feat = localStorage.getItem('FeatureCollection')
