@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { MissingContent, MapContainer, SignIn, SignUp, Collections, Categories, Users } from 'components'
+import { MissingContent, MapContainer, SignIn, SignUp, Collections, Categories, Users, Locations } from 'components'
 import { Main } from 'templates/Main'
 import axios from 'axios'
 
@@ -35,6 +35,10 @@ function App() {
         {
           path: '/users',
           element: <Users />
+        },
+        {
+          path: '/locations',
+          element: <Locations />
         }
       ])
     }
