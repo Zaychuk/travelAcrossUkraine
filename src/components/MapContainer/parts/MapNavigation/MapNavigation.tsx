@@ -2,8 +2,9 @@ import React, { FC, ReactNode, useState } from 'react'
 import { Box, Grid } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 import { NavButton } from 'components/ui'
+import { Location } from 'types/Location'
 
-import { Geolocation, SelectLayers, CustomMarker, Draw, MapFilter } from './parts'
+import { Geolocation, SelectLayers, Draw, MapFilter } from './parts'
 import { sx } from './style'
 import { controlPanelState, TControlPanel, ButtonActionNames } from './helper'
 
@@ -12,9 +13,11 @@ interface MapNavProps {
   onSelectLayer: (name: string) => void
   onDeleteAllFeatures: () => void
   onSetSavedFeature: (isSaved: boolean) => void
+  setFoundedLocations: (locations: Location[]) => void
+  onApplyFilters: (locations: Location[]) => void
 }
 
-const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFeature, onDeleteAllFeatures }) => {
+const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFeature, onDeleteAllFeatures, setFoundedLocations, onApplyFilters }) => {
   const [controlTools, setControlTools] = useState<TControlPanel[]>(controlPanelState)
 
   const updateStatusByName = (name: string) => {
@@ -54,15 +57,15 @@ const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFea
         </Grid>
       </Box>
       <Box sx={sx.filterContainer}>
-        <MapFilter />
+        <MapFilter onApplyFilters={onApplyFilters} />
       </Box>
       <Grid>
         <Geolocation isActiveMode={getButtonStatus(ButtonActionNames.TRACK_LOCATION)} />
         <Draw
           isOpenedDrawMenu={getButtonStatus(ButtonActionNames.ACTIVATE_DRAWING)}
           setSavedFeature={onSetSavedFeature}
+          setFoundedLocations={setFoundedLocations}
         />
-        {getButtonStatus(ButtonActionNames.ADD_NEW_MARKER) && <CustomMarker />}
         {children}
       </Grid>
       <SelectLayers

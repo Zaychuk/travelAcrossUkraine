@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { fromLonLat } from 'ol/proj'
 import { RMap, ROSM as ROpenStreetMap, RLayerTile, RLayerVector, RFeature, RControl } from 'rlayers'
 import { RView } from 'rlayers/RMap'
@@ -8,10 +8,12 @@ import { TCircle, TFeature } from 'types/GeometryFigure'
 import { getAllLocations } from 'api/locationApi'
 import { Location } from 'types/Location'
 import { Coordinate } from 'ol/coordinate'
+import ReactPortal from 'components/core/ReactPortal/ReactPortal'
 
 import { MapNavigation } from './parts'
 import { getAllFeatureFrom, sources as LayerSource, TSourse } from './helper'
 import { styles } from './styles'
+import { ModalWindow } from './parts/ModalWindow/ModalWindow'
 
 const MapContainer: FC = () => {
   const initialMapOptions: RView = {
@@ -23,21 +25,9 @@ const MapContainer: FC = () => {
   const [features, setFeatures] = useState<TFeature[] | null>(null)
   const [locations, setLocations] = useState<Location[] | null>(null)
   const [isSavedFeature, setIsSavedFeature] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [clickedLocationId, setClickedLocationId] = useState<string>('')
 
-  // useEffect(() => {
-  //   console.log(getAllLocations())
-  //   /* choosing the center of the map by location */
-  //   if ('geolocation' in navigator) {
-  //     navigator.geolocation.getCurrentPosition(position => {
-  //       const newView = {
-  //         center: fromLonLat([position.coords.longitude, position.coords.latitude]),
-  //         zoom: 9
-  //       }
-  //       setView({ ...view, ...newView })
-  //     })
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
   console.log(locations)
 
   const fetchLocations = () => {
@@ -102,36 +92,55 @@ const MapContainer: FC = () => {
   const handleSetSavedFeature = (isSaved: boolean) => {
     setIsSavedFeature(isSaved)
     setTimeout(() => {
-    fetchLocations()
+      fetchLocations()
     }, 1000)
   }
   const handleRemoveAllFeatures = () => {
     setFeatures(null)
     localStorage.removeItem('FeatureCollection')
   }
+  const handleCloseModal = () => {
+    console.log('click')
+    setShowModal(false)
+  }
+  // const handleSave = async (modalData: string[] | null) => {
+  //   await addToCollections(clickedLocationId, modalData)
+  // }
+  const setFoundedLocations = (foundedLocations: Location[]) => {
+    setLocations(foundedLocations)
+  }
+  const onApplyFilters = (foundedLocations: Location[]) => {
+    setLocations(foundedLocations)
+  }
+  console.log(features, 'feat')
   return (
-    <Grid container sx={styles.mapContainer}>
-      <RMap initial={initialMapOptions} view={[view, setView]} {...styles.map}>
-        <MapNavigation
-          onSelectLayer={handleSelectLayer}
-          onSetSavedFeature={handleSetSavedFeature}
-          onDeleteAllFeatures={handleRemoveAllFeatures}
-        >
-          <ROpenStreetMap />
-          {sources.map(item => (
-            <RLayerTile key={item.name} url={item.url} attributions={item.attributions} visible={item.visible} />
-          ))}
-          {features && (
-            <RLayerVector properties={{ name: 'FeaturesLayer' }}>
-              {getAllFeatureFrom(features).map((feature, index) => (
-                <RFeature key={index} feature={feature} style={StylesMapUtil.defaultStyleFunction(feature)} onClick={(el: any) => console.log(el)} />
-              ))}
-            </RLayerVector>
-          )}
-          <RControl.RScaleLine />
-        </MapNavigation>
-      </RMap>
-    </Grid>
+    <React.Fragment>
+      <ReactPortal wrapperId='modal-root'>{showModal && <ModalWindow locationId={clickedLocationId} onClose={handleCloseModal} />}</ReactPortal>
+      <Grid container sx={styles.mapContainer}>
+        <RMap initial={initialMapOptions} view={[view, setView]} {...styles.map}>
+          <MapNavigation
+            onSelectLayer={handleSelectLayer}
+            onSetSavedFeature={handleSetSavedFeature}
+            onDeleteAllFeatures={handleRemoveAllFeatures}
+            setFoundedLocations={setFoundedLocations}
+            onApplyFilters={onApplyFilters}
+          >
+            <ROpenStreetMap />
+            {sources.map(item => (
+              <RLayerTile key={item.name} url={item.url} attributions={item.attributions} visible={item.visible} />
+            ))}
+            {features && (
+              <RLayerVector properties={{ name: 'FeaturesLayer' }}>
+                {getAllFeatureFrom(features).map((feature, index) => (
+                  <RFeature key={index} feature={feature} style={StylesMapUtil.defaultStyleFunction(feature, locations?.find(loc => loc.id === features[index]?.id)?.category.type.name)} onClick={(el: any) => { setShowModal(true); setClickedLocationId(el.target.id_) }} />
+                ))}
+              </RLayerVector>
+            )}
+            <RControl.RScaleLine />
+          </MapNavigation>
+        </RMap>
+      </Grid>
+    </React.Fragment>
   )
 }
 MapContainer.displayName = 'MapContainer'

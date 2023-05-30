@@ -44,11 +44,11 @@ function SignUp() {
   const onSubmit: SubmitHandler<FormSchemaType> = async data => {
     const isSuccessul = await signUp(data as CreateUser)
     if (isSuccessul) {
-      alert('Registration is successful.\r\nReenter you credentials to login.')
+      alert('Успішна реєстрація.\r\nПовторно введіть логін та пароль для входу.')
       methods.reset()
       navigate('/sign-in')
     } else {
-      alert('Some of the parameters are invalid.')
+      alert('Сталася помилка при реєстрації.')
     }
   }
 

@@ -14,7 +14,6 @@ import MapIcon from '@mui/icons-material/Map'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import CategoryIcon from '@mui/icons-material/Category'
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation'
-import InfoIcon from '@mui/icons-material/Info'
 import HomeIcon from '@mui/icons-material/Home'
 import GroupIcon from '@mui/icons-material/Group'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -85,7 +84,7 @@ const Main: FC = () => {
                   <ListItemIcon>
                     <NotListedLocationIcon />
                   </ListItemIcon>
-                  <ListItemText primary='Локації' />
+                  <ListItemText primary='Нові локації' />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
@@ -98,14 +97,6 @@ const Main: FC = () => {
               </ListItem>
             </React.Fragment>
           )}
-          <ListItem disablePadding>
-            <ListItemButton component={Link} to='/about' sx={{}}>
-              <ListItemIcon>
-                <InfoIcon />
-              </ListItemIcon>
-              <ListItemText primary='Про нас' />
-            </ListItemButton>
-          </ListItem>
         </List>
         <Divider />
         <List sx={{ marginTop: 'auto' }}>

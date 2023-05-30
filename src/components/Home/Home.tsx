@@ -8,12 +8,19 @@ export default function Home() {
     <S.Wrapper>
       <S.Bg src={Bg} alt='Bg' />
       <S.Title>Подорожі Україною</S.Title>
-      <Box position='absolute' display='flex' justifyContent='center' sx={{ top: '50%', width: '100%' }}>
+      <Box position='absolute' display='flex' justifyContent='center' sx={{ top: '30%', width: '100%' }}>
         <S.Description>
-          Quisque mauris leo, commodo non porttitor eget, eleifend sed velit. Proin vehicula, metus consequat molestie
-          convallis, metus dui scelerisque lectus, sed convallis nisl erat quis massa. Vestibulum at felis purus.
-          Vestibulum auctor faucibus augue, quis feugiat ipsum blandit ac. Morbi condimentum nulla eu eros lacinia
-          finibus. Pellentesque interdum felis magna, lobortis condimentum massa auctor et. Aenean erat urna, rutrum et
+          &emsp;Подорожі завжди приносять дуже хороші емоції, враження та є довгоочікуваними та бажаними для кожного.
+          Проте екологічний стан довкілля може мати неабиякий вплив на якість та досвід подорожі.
+          <br />
+          <br />
+          &emsp;Перш за все ключовим чинником, що відбиває бажання поїхати в певне місце є забруднення повітря, води чи землі, що може призвести до проблем зі здоров’ям і вплинути чи завдати шкоди природним пам’яткам і ландшафтам, зменшуючи їх красу та екологічну цінність.
+          <br />
+          <br />
+          &emsp;Мандрівникам дуже важливо враховувати екологічний стан довкілля та робити відповідальний вибір при плануванні безпечної подорожі.
+          <br />
+          <br />
+          &emsp;Саме тому була створена веб-платформа "екоМандри", щоб зробити ваші поїздки безпечнішими!
         </S.Description>
       </Box>
     </S.Wrapper>
