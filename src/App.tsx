@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { MissingContent, MapContainer, SignIn, SignUp, Collections, Categories, Users, Locations } from 'components'
+import { MissingContent, MapContainer, SignIn, SignUp, Collections, Categories, Users, Home, Locations } from 'components'
 import { Main } from 'templates/Main'
 import axios from 'axios'
 
@@ -15,7 +15,7 @@ function App() {
   setupInterceptorsTo(axios)
   const getMenuItems = (): IMenuItem[] => {
     let menuItems: IMenuItem[] = [
-      { index: true, element: <div>Головна</div> },
+      { index: true, element: <Home /> },
       {
         path: 'map',
         element: <MapContainer />
