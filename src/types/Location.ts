@@ -1,12 +1,14 @@
 import { Category } from './Category'
-import { Image } from './Image'
 
 export type Location = {
     id: string
     name: string
     description: string
-    wikipediaUrl: string
-    petitionUrl: string
+    wikipediaUrl?: string
+    petitionUrl?: string
     category: Category
-    images: Image[]
+    imageUrls: string[]
+    geoPoint: {coordinateX: number; coordinateY: number}
+    polygon:{geoPoints: {coordinateX: number; coordinateY: number; sequenceNumber: number}[]}
+    circle:{centerGeoPoint:{coordinateX: number; coordinateY: number}, radius: number}
 }
