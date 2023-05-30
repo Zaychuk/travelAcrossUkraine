@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText'
 import MapIcon from '@mui/icons-material/Map'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import CategoryIcon from '@mui/icons-material/Category'
+import NotListedLocationIcon from '@mui/icons-material/NotListedLocation'
 import InfoIcon from '@mui/icons-material/Info'
 import HomeIcon from '@mui/icons-material/Home'
 import GroupIcon from '@mui/icons-material/Group'
@@ -77,6 +78,14 @@ const Main: FC = () => {
                     <CategoryIcon />
                   </ListItemIcon>
                   <ListItemText primary='Категорії' />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton component={Link} to='/locations'>
+                  <ListItemIcon>
+                    <NotListedLocationIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Локації' />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
