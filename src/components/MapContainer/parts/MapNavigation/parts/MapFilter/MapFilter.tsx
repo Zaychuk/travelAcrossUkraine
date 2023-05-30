@@ -103,7 +103,7 @@ const MapFilter: FC<MapFilterProps> = ({ onApplyFilters }) => {
   return (
     <Fragment>
       <Box>
-        <NavButton tooltipTitle='Filter' tooltipPlacement='right-start' onClick={handleClickOpen}>
+        <NavButton tooltipTitle='Фільтр' tooltipPlacement='right-start' onClick={handleClickOpen}>
           <FilterAltIcon />
         </NavButton>
       </Box>

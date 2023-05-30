@@ -1,6 +1,5 @@
 import React, { FC, ReactNode, useState } from 'react'
 import { Box, Grid } from '@mui/material'
-import { Delete } from '@mui/icons-material'
 import { NavButton } from 'components/ui'
 import { Location } from 'types/Location'
 
@@ -11,13 +10,12 @@ import { controlPanelState, TControlPanel, ButtonActionNames } from './helper'
 interface MapNavProps {
   children?: ReactNode
   onSelectLayer: (name: string) => void
-  onDeleteAllFeatures: () => void
   onSetSavedFeature: (isSaved: boolean) => void
   setFoundedLocations: (locations: Location[]) => void
   onApplyFilters: (locations: Location[]) => void
 }
 
-const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFeature, onDeleteAllFeatures, setFoundedLocations, onApplyFilters }) => {
+const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFeature, setFoundedLocations, onApplyFilters }) => {
   const [controlTools, setControlTools] = useState<TControlPanel[]>(controlPanelState)
 
   const updateStatusByName = (name: string) => {
@@ -51,9 +49,6 @@ const MapNavigation: FC<MapNavProps> = ({ children, onSelectLayer, onSetSavedFea
               {button.icon}
             </NavButton>
           ))}
-          <NavButton onClick={onDeleteAllFeatures} tooltipTitle='Delete all figure'>
-            <Delete />
-          </NavButton>
         </Grid>
       </Box>
       <Box sx={sx.filterContainer}>

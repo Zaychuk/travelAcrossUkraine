@@ -39,9 +39,9 @@ const MapContainer: FC = () => {
       .catch(err => console.log(err))
   }
 
-  useEffect(() => {
-    fetchLocations()
-  }, [])
+  // useEffect(() => {
+  //   fetchLocations()
+  // }, [])
 
   useEffect(() => {
     const parsedLocations: TFeature[] = []
@@ -95,24 +95,18 @@ const MapContainer: FC = () => {
       fetchLocations()
     }, 1000)
   }
-  const handleRemoveAllFeatures = () => {
-    setFeatures(null)
-    localStorage.removeItem('FeatureCollection')
-  }
   const handleCloseModal = () => {
     console.log('click')
     setShowModal(false)
   }
-  // const handleSave = async (modalData: string[] | null) => {
-  //   await addToCollections(clickedLocationId, modalData)
-  // }
+
   const setFoundedLocations = (foundedLocations: Location[]) => {
     setLocations(foundedLocations)
   }
   const onApplyFilters = (foundedLocations: Location[]) => {
     setLocations(foundedLocations)
   }
-  console.log(features, 'feat')
+
   return (
     <React.Fragment>
       <ReactPortal wrapperId='modal-root'>{showModal && <ModalWindow locationId={clickedLocationId} onClose={handleCloseModal} />}</ReactPortal>
@@ -121,7 +115,6 @@ const MapContainer: FC = () => {
           <MapNavigation
             onSelectLayer={handleSelectLayer}
             onSetSavedFeature={handleSetSavedFeature}
-            onDeleteAllFeatures={handleRemoveAllFeatures}
             setFoundedLocations={setFoundedLocations}
             onApplyFilters={onApplyFilters}
           >
