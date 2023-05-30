@@ -29,7 +29,7 @@ export const sources: TSourse[] = [
   //   url: 'https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key=EpJ7gTfyPa46KzZqwU7q'
   // },
   {
-    name: 'Streets',
+    name: 'Звичайна',
     visible: true,
     attributions:
       '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
@@ -37,14 +37,14 @@ export const sources: TSourse[] = [
     url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
   },
   {
-    name: 'Topo',
+    name: 'Топологічна',
     url: 'https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png',
     visible: false,
     crossOrigin: 'anonymous',
     attributions: 'Kartendaten: © OpenStreetMap-Mitwirkende, SRTM | Kartendarstellung: © OpenTopoMap (CC-BY-SA)'
   },
   {
-    name: 'Satelite',
+    name: 'Супутник',
     attributions,
     visible: false,
     crossOrigin: 'anonymous',
