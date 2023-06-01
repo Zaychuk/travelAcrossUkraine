@@ -44,12 +44,10 @@ export async function declineLocation(id: string): Promise<string> {
   return data.data as string
 }
 
-export async function addToCollection(locationId: string, collectionId: string): Promise<string> {
-  const data = await axios.get(`${getBaseUrl()}/Collections/addlocation`, {
-    params: {
-      locationId,
-      collectionId
-    }
-})
+export async function addToCollection(locationId: string, collectionIds: string[]): Promise<string> {
+  const data = await axios.post(`${getBaseUrl()}/Collections/addlocation`, {
+    locationId,
+    collectionIds
+  })
   return data.data as string
 }

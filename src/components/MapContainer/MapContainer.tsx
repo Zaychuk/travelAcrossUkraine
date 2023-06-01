@@ -52,9 +52,7 @@ const MapContainer: FC = () => {
         let polygon: Coordinate[][]
         const geometry: TFeature = {
           id: locat.id,
-          type: locat.geoPoint !== null ? 'Point'
-            : (locat.circle !== null ? 'Circle'
-              : 'Polygon'),
+          type: locat.geoPoint !== null ? 'Point' : locat.circle !== null ? 'Circle' : 'Polygon',
           geometries: []
         }
         if (locat.geoPoint !== null) {
@@ -62,15 +60,22 @@ const MapContainer: FC = () => {
           console.log(coord, 'coord')
           geometry.geometries = coord
         } else if (locat.circle !== null) {
-          circle = { center: [locat.circle.centerGeoPoint.coordinateX, locat.circle.centerGeoPoint.coordinateY], radius: locat.circle.radius }
+          circle = {
+            center: [locat.circle.centerGeoPoint.coordinateX, locat.circle.centerGeoPoint.coordinateY],
+            radius: locat.circle.radius
+          }
           console.log(circle, 'circle')
           geometry.geometries = circle
         } else if (locat.polygon !== null) {
-          const sortedPolyginPoints = locat.polygon.geoPoints.sort((first, second) => (first.sequenceNumber > second.sequenceNumber) ? 1 : ((second.sequenceNumber > first.sequenceNumber) ? -1 : 0))
-          polygon = [sortedPolyginPoints.map(polPoint => {
-            const polCoord: Coordinate = [polPoint.coordinateX, polPoint.coordinateY]
-            return polCoord
-          })]
+          const sortedPolyginPoints = locat.polygon.geoPoints.sort((first, second) =>
+            first.sequenceNumber > second.sequenceNumber ? 1 : second.sequenceNumber > first.sequenceNumber ? -1 : 0
+          )
+          polygon = [
+            sortedPolyginPoints.map(polPoint => {
+              const polCoord: Coordinate = [polPoint.coordinateX, polPoint.coordinateY]
+              return polCoord
+            })
+          ]
           console.log(polygon, 'polygon')
           geometry.geometries = polygon
         }
@@ -91,8 +96,11 @@ const MapContainer: FC = () => {
 
   const handleSetSavedFeature = (isSaved: boolean) => {
     setIsSavedFeature(isSaved)
+    alert('Пропозицію на створення локації відправлено на перевірку адміністратором')
     setTimeout(() => {
-      fetchLocations()
+      if (localStorage.getItem('role') === 'Admin') {
+        fetchLocations()
+      }
     }, 1000)
   }
   const handleCloseModal = () => {
@@ -109,7 +117,9 @@ const MapContainer: FC = () => {
 
   return (
     <React.Fragment>
-      <ReactPortal wrapperId='modal-root'>{showModal && <ModalWindow locationId={clickedLocationId} onClose={handleCloseModal} />}</ReactPortal>
+      <ReactPortal wrapperId='modal-root'>
+        {showModal && <ModalWindow locationId={clickedLocationId} onClose={handleCloseModal} />}
+      </ReactPortal>
       <Grid container sx={styles.mapContainer}>
         <RMap initial={initialMapOptions} view={[view, setView]} {...styles.map}>
           <MapNavigation
@@ -125,7 +135,18 @@ const MapContainer: FC = () => {
             {features && (
               <RLayerVector properties={{ name: 'FeaturesLayer' }}>
                 {getAllFeatureFrom(features).map((feature, index) => (
-                  <RFeature key={index} feature={feature} style={StylesMapUtil.defaultStyleFunction(feature, locations?.find(loc => loc.id === features[index]?.id)?.category.type.name)} onClick={(el: any) => { setShowModal(true); setClickedLocationId(el.target.id_) }} />
+                  <RFeature
+                    key={index}
+                    feature={feature}
+                    style={StylesMapUtil.defaultStyleFunction(
+                      feature,
+                      locations?.find(loc => loc.id === features[index]?.id)?.category.type.name
+                    )}
+                    onClick={(el: any) => {
+                      setShowModal(true)
+                      setClickedLocationId(el.target.id_)
+                    }}
+                  />
                 ))}
               </RLayerVector>
             )}
