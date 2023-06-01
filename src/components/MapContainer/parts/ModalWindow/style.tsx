@@ -27,15 +27,18 @@ export const Title = styled(Typography)`
 `
 
 export const LocationContainer = styled(Box)`
-  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px 20px;
   border-radius: 12px;
-  gap: 10px;
+  gap: 15px;
   width: 430px;
 `
 
 export const Name = styled(Typography)`
-  font-size: 22px !important;
-  font-weight: 500 !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  margin: 0 auto;
 `
 export const Link = styled.a`
   display: flex;
