@@ -32,9 +32,9 @@ export default function SignIn() {
     console.log(response)
 
     if (response === null) {
-      alert('Failed to login. Try again.')
+      alert('Невдалося увійти. Спробуйте ще раз.')
     } else {
-      alert('Successful login')
+      alert('Вхід виконано успішно')
       localStorage.setItem('token', response.token)
       localStorage.setItem('role', response.role)
       localStorage.setItem('isAuthenticated', 'true')

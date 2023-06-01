@@ -100,12 +100,12 @@ export class StylesMapUtil {
     }
   }
 
-  static defaultStyleFunction(feature: Feature<Geometry> | RenderFeature): Style | undefined {
+  static defaultStyleFunction(feature: Feature<Geometry> | RenderFeature, type: string | undefined): Style | undefined {
     const geom = feature.getGeometry()
     if (!geom) {
       return undefined
     }
-    return StylesMapUtil.styleFunction(geom.getType(), 'rgba(0, 0, 0, 0.6)', '#0000ff')
+    return StylesMapUtil.styleFunction(geom.getType(), type === 'Екологічна проблема' ? 'rgba(255, 0, 0, 0.6)' : 'rgba(0, 200, 0, 0.6)', type === 'Екологічна проблема' ? 'rgba(255, 0, 0, 1)' : 'rgba(0, 200, 0, 1)')
   }
 
   /**

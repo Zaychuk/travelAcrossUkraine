@@ -23,6 +23,8 @@ import {
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import { NavButton } from 'components/ui'
 import { getAllTypesWithCategories } from 'api/typesApi'
+import { getAllLocationsByFilter } from 'api/locationApi'
+import { Location } from 'types/Location'
 
 const FormSchema = z.object({
   term: z.string().optional(),
@@ -30,8 +32,10 @@ const FormSchema = z.object({
 })
 
 type FormSchemaType = z.infer<typeof FormSchema>
-
-const MapFilter: FC = () => {
+interface MapFilterProps {
+  onApplyFilters: (locations: Location[]) => void
+}
+const MapFilter: FC<MapFilterProps> = ({ onApplyFilters }) => {
   const methods = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -66,9 +70,9 @@ const MapFilter: FC = () => {
   const handleClose = () => {
     setOpen(false)
   }
-  const onSubmit: SubmitHandler<FormSchemaType> = data => {
+  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
     console.log(data)
-
+    onApplyFilters(await getAllLocationsByFilter(data))
     methods.reset()
     handleClose()
   }
@@ -99,7 +103,7 @@ const MapFilter: FC = () => {
   return (
     <Fragment>
       <Box>
-        <NavButton tooltipTitle='Filter' tooltipPlacement='right-start' onClick={handleClickOpen}>
+        <NavButton tooltipTitle='Фільтр' tooltipPlacement='right-start' onClick={handleClickOpen}>
           <FilterAltIcon />
         </NavButton>
       </Box>
@@ -150,10 +154,10 @@ const MapFilter: FC = () => {
             </DialogContent>
             <DialogActions>
               <Button type='button' onClick={handleClose}>
-                Cancel
+                Закрити
               </Button>
               <Button type='submit' variant='contained'>
-                Ok
+                Застосувати
               </Button>
             </DialogActions>
           </Box>

@@ -115,7 +115,7 @@ export default function Locations() {
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography fontSize={22} fontWeight={500}>
-                  Посилання на вікіпелію:
+                  Посилання на вікіпедію:
                 </Typography>
                 <Link to={location.wikipediaUrl || ''}>{location.wikipediaUrl || 'URL адреси немає'}</Link>
               </Box>

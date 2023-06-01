@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { RadioButtonUnchecked, HexagonRounded, FiberManualRecord, Timeline } from '@mui/icons-material'
+import { RadioButtonUnchecked, HexagonRounded, FiberManualRecord } from '@mui/icons-material'
 import { GeometryFigure } from 'types/GeometryFigure'
 
 type DrawSourse = {
@@ -9,23 +9,18 @@ type DrawSourse = {
 }
 export const drawTools: DrawSourse[] = [
   {
-    name: 'Polygon',
+    name: 'Полігон',
     type: 'Polygon',
     icon: <HexagonRounded />
   },
   {
-    name: 'Point',
+    name: 'Геоточка',
     type: 'Point',
     icon: <FiberManualRecord />
   },
   {
-    name: 'Circle',
+    name: 'Коло',
     type: 'Circle',
     icon: <RadioButtonUnchecked />
-  },
-  {
-    name: 'Line',
-    type: 'LineString',
-    icon: <Timeline />
   }
 ]

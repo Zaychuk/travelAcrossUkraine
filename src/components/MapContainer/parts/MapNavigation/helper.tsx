@@ -1,4 +1,4 @@
-import { Layers, Mode, GpsFixed, AddLocation } from '@mui/icons-material'
+import { Layers, Mode, GpsFixed } from '@mui/icons-material'
 
 export type TControlPanel = {
   name: string
@@ -11,33 +11,26 @@ export type TControlPanel = {
 // eslint-disable-next-line no-shadow
 export const enum ButtonActionNames {
   ACTIVATE_DRAWING = 'activateDrawing',
-  ADD_NEW_MARKER = 'addMarker',
   CHANGE_LAYER = 'changeLayer',
   TRACK_LOCATION = 'trackGeolocation'
 }
 export const controlPanelState: TControlPanel[] = [
   {
     name: ButtonActionNames.CHANGE_LAYER,
-    tooltip: 'Change map layer',
+    tooltip: 'Змінити тип карти',
     state: false,
     icon: <Layers />
   },
   {
     name: ButtonActionNames.ACTIVATE_DRAWING,
-    tooltip: 'Draw figures',
+    tooltip: 'Малювати фігури',
     state: false,
     icon: <Mode />
   },
   {
     name: ButtonActionNames.TRACK_LOCATION,
-    tooltip: 'Track geolocation',
+    tooltip: 'Відслідкувати геолокацію',
     state: false,
     icon: <GpsFixed />
-  },
-  {
-    name: ButtonActionNames.ADD_NEW_MARKER,
-    tooltip: 'Add marker',
-    state: false,
-    icon: <AddLocation />
   }
 ]
