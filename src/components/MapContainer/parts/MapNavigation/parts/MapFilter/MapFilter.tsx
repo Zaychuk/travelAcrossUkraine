@@ -148,7 +148,7 @@ const MapFilter: FC<MapFilterProps> = ({ onApplyFilters }) => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField fullWidth {...methods.register('term')} id='str' label='Ключове слово' />
+                  <TextField fullWidth {...methods.register('term')} id='str' label='Ключове слово' autoFocus />
                 </Grid>
               </Grid>
             </DialogContent>

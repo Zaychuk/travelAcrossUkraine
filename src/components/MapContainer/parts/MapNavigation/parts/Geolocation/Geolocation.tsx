@@ -22,6 +22,7 @@ const Geolocation: FC<GeolocationProps> = ({ isActiveMode }) => {
 
   useEffect(() => {
     if ('geolocation' in navigator) {
+      console.log(123)
       navigator.geolocation.getCurrentPosition(position => {
         setTrackingPosition(new Point(fromLonLat([position.coords.longitude, position.coords.latitude])))
       })

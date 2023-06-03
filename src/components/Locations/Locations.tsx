@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment, MouseEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Typography } from '@mui/material'
+import { Box, Chip, Typography } from '@mui/material'
 import Wiki from 'assets/svg/wikipedia-svgrepo-com.svg'
 import Petition from 'assets/svg/book-open-svgrepo-com.svg'
 import ReactPortal from 'components/core/ReactPortal/ReactPortal'
@@ -86,7 +86,10 @@ export default function Locations() {
         <Box sx={{ padding: '20px' }}>
           {locations.map(location => (
             <S.LocationContainer key={location.id}>
+            <Box display='flex' flexDirection='column'>
               <S.Name>{location.name}</S.Name>
+              <Chip label={location.category.name} sx={{ margin: '0 auto', width: '20%' }} />
+            </Box>
 
               <S.ImagesContainer>
                 {location.imageUrls.map((img, index) => (

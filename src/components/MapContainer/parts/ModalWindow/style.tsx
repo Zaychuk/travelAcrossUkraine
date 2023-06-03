@@ -57,6 +57,7 @@ export const ImagesContainer = styled.div`
   display: flex;
   align-items: center;
   overflow-x: auto;
+  gap: 4px;
 `
 export const ImgContainer = styled.div`
   display: flex;

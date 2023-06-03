@@ -55,10 +55,11 @@ const Draw: FC<DrawProps> = ({ isOpenedDrawMenu, setSavedFeature, setFoundedLoca
     if (!modalData) return
     setSavedFeature(true)
 
-    await createLocation({
+    const createdLocationId = await createLocation({
       ...modalData,
       ...renderFigureInfo()
     })
+    localStorage.setItem('createdLocationId', createdLocationId)
     resetDrawing()
   }
   const renderFigureInfo = () => {

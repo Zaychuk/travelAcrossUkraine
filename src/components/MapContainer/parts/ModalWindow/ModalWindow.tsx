@@ -158,7 +158,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({ onClose, locationId }) => {
                 <Typography>{location.description}</Typography>
               </Box>
               {location?.wikipediaUrl ? (
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }} overflow='hidden'>
                   <Typography fontSize={22} fontWeight={500}>
                     Посилання на вікіпедію:
                   </Typography>

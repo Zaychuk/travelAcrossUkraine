@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Fragment, MouseEvent, useEffect, useState } from 'react'
+import React, { Fragment, MouseEvent, useEffect, useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, Box, Button, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
@@ -141,7 +141,8 @@ export default function Collections() {
               </S.Summary>
               <AccordionDetails>
                 {collection.locations?.map(location => (
-                  <S.LocationContainer key={location.id}>
+                  <React.Fragment key={location.id}>
+                    <S.LocationContainer key={location.id}>
                     <S.Wrapper>
                       <S.NameContainer>
                         <S.Name>{location.name}</S.Name>
@@ -173,7 +174,8 @@ export default function Collections() {
                       </Typography>
                       <Typography>{location.description}</Typography>
                     </Box>
-                  </S.LocationContainer>
+                    </S.LocationContainer><hr />
+                  </React.Fragment>
                 ))}
               </AccordionDetails>
             </Accordion>
