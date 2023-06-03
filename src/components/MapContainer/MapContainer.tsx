@@ -5,7 +5,7 @@ import { RView } from 'rlayers/RMap'
 import { Grid } from '@mui/material'
 import { StylesMapUtil } from 'utils'
 import { TCircle, TFeature } from 'types/GeometryFigure'
-import { getAllLocations } from 'api/locationApi'
+import { getLocationById } from 'api/locationApi'
 import { Location } from 'types/Location'
 import { Coordinate } from 'ol/coordinate'
 import ReactPortal from 'components/core/ReactPortal/ReactPortal'
@@ -23,17 +23,26 @@ const MapContainer: FC = () => {
   const [view, setView] = useState<RView>(initialMapOptions)
   const [sources, setSources] = useState<TSourse[]>(LayerSource)
   const [features, setFeatures] = useState<TFeature[] | null>(null)
-  const [locations, setLocations] = useState<Location[] | null>(null)
+  const [locations, setLocations] = useState<Location[]>([])
   const [isSavedFeature, setIsSavedFeature] = useState<boolean>(false)
   const [showModal, setShowModal] = useState<boolean>(false)
   const [clickedLocationId, setClickedLocationId] = useState<string>('')
 
-  console.log(locations)
+  // console.log(locations)
 
-  const fetchLocations = () => {
-    getAllLocations()
+  // const fetchLocations = () => {
+  //   getAllLocations()
+  //     .then(data => {
+  //       setLocations(data)
+  //       return true
+  //     })
+  //     .catch(err => console.log(err))
+  // }
+
+  const fetchCreatedLocation = (locationId: string) => {
+    getLocationById(locationId)
       .then(data => {
-        setLocations(data)
+        setLocations(prev => [data, ...prev])
         return true
       })
       .catch(err => console.log(err))
@@ -96,10 +105,15 @@ const MapContainer: FC = () => {
 
   const handleSetSavedFeature = (isSaved: boolean) => {
     setIsSavedFeature(isSaved)
+    if (localStorage.getItem('role') === 'User') {
     alert('Пропозицію на створення локації відправлено на перевірку адміністратором')
+    } else {
+    alert('Локація успішно створена')
+    }
     setTimeout(() => {
       if (localStorage.getItem('role') === 'Admin') {
-        fetchLocations()
+        const createdLocationId = localStorage.getItem('createdLocationId')
+        fetchCreatedLocation(createdLocationId as string)
       }
     }, 1000)
   }

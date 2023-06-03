@@ -24,6 +24,7 @@ export const LocationContainer = styled(Box)`
 export const Name = styled(Typography)`
   font-size: 28px !important;
   font-weight: 500 !important;
+  margin: 0 auto !important;
 `
 export const Link = styled.a`
   display: flex;

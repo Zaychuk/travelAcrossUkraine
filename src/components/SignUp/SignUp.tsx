@@ -126,7 +126,7 @@ function SignUp() {
                 </Grid>
               </Grid>
               <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-                Зараєструватися
+                Зарeєструватися
               </Button>
               <Grid container justifyContent='flex-end'>
                 <Grid item>
